@@ -1,0 +1,90 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: myrosot1 - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x409 /fo"Release/myrosot1.res" /d "NDEBUG" /d "_AFXDLL" "C:\Documents and Settings\gsengupt\Desktop\NIVA-Skeleton\myrosot1.rc"" 
+Creating temporary file "C:\DOCUME~1\gsengupt\LOCALS~1\Temp\RSP8.tmp" with contents
+[
+/nologo /G5 /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /Fp"Release/myrosot1.pch" /Yu"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
+"C:\Documents and Settings\gsengupt\Desktop\NIVA-Skeleton\AdjColDlg.cpp"
+"C:\Documents and Settings\gsengupt\Desktop\NIVA-Skeleton\AdjGameArea.cpp"
+"C:\Documents and Settings\gsengupt\Desktop\NIVA-Skeleton\controlalgo.cpp"
+"C:\Documents and Settings\gsengupt\Desktop\NIVA-Skeleton\GrabberSettingsDlg.cpp"
+"C:\Documents and Settings\gsengupt\Desktop\NIVA-Skeleton\map.cpp"
+"C:\Documents and Settings\gsengupt\Desktop\NIVA-Skeleton\myrosot1.cpp"
+"C:\Documents and Settings\gsengupt\Desktop\NIVA-Skeleton\myrosot1Dlg.cpp"
+"C:\Documents and Settings\gsengupt\Desktop\NIVA-Skeleton\myStrategy.cpp"
+"C:\Documents and Settings\gsengupt\Desktop\NIVA-Skeleton\Parameters.cpp"
+"C:\Documents and Settings\gsengupt\Desktop\NIVA-Skeleton\RFComm.cpp"
+"C:\Documents and Settings\gsengupt\Desktop\NIVA-Skeleton\RFCommDlg.cpp"
+"C:\Documents and Settings\gsengupt\Desktop\NIVA-Skeleton\TestingDlg2.cpp"
+"C:\Documents and Settings\gsengupt\Desktop\NIVA-Skeleton\TuningDlg.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\gsengupt\LOCALS~1\Temp\RSP8.tmp" 
+Creating temporary file "C:\DOCUME~1\gsengupt\LOCALS~1\Temp\RSP9.tmp" with contents
+[
+/nologo /G5 /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /Fp"Release/myrosot1.pch" /Yc"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
+"C:\Documents and Settings\gsengupt\Desktop\NIVA-Skeleton\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\gsengupt\LOCALS~1\Temp\RSP9.tmp" 
+Creating temporary file "C:\DOCUME~1\gsengupt\LOCALS~1\Temp\RSPA.tmp" with contents
+[
+winmm.lib user32.lib fbus32.lib /nologo /subsystem:windows /incremental:yes /pdb:"Release/myrosot1.pdb" /machine:I386 /out:"Release/myrosot1.exe" 
+".\Release\AdjColDlg.obj"
+".\Release\AdjGameArea.obj"
+".\Release\controlalgo.obj"
+".\Release\GrabberSettingsDlg.obj"
+".\Release\map.obj"
+".\Release\myrosot1.obj"
+".\Release\myrosot1Dlg.obj"
+".\Release\myStrategy.obj"
+".\Release\Parameters.obj"
+".\Release\RFComm.obj"
+".\Release\RFCommDlg.obj"
+".\Release\StdAfx.obj"
+".\Release\TestingDlg2.obj"
+".\Release\TuningDlg.obj"
+".\vision.obj"
+".\Release\myrosot1.res"
+]
+Creating command line "link.exe @C:\DOCUME~1\gsengupt\LOCALS~1\Temp\RSPA.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+StdAfx.cpp
+Compiling...
+AdjColDlg.cpp
+AdjGameArea.cpp
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\math.h(426) : warning C4091: 'extern __declspec(dllimport ) ' : ignored on left of 'double' when no variable is declared
+controlalgo.cpp
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\math.h(426) : warning C4091: 'extern __declspec(dllimport ) ' : ignored on left of 'double' when no variable is declared
+GrabberSettingsDlg.cpp
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\math.h(426) : warning C4091: 'extern __declspec(dllimport ) ' : ignored on left of 'double' when no variable is declared
+map.cpp
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\math.h(426) : warning C4091: 'extern __declspec(dllimport ) ' : ignored on left of 'double' when no variable is declared
+myrosot1.cpp
+myrosot1Dlg.cpp
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\math.h(426) : warning C4091: 'extern __declspec(dllimport ) ' : ignored on left of 'double' when no variable is declared
+myStrategy.cpp
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\math.h(426) : warning C4091: 'extern __declspec(dllimport ) ' : ignored on left of 'double' when no variable is declared
+Parameters.cpp
+RFComm.cpp
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\math.h(426) : warning C4091: 'extern __declspec(dllimport ) ' : ignored on left of 'double' when no variable is declared
+RFCommDlg.cpp
+C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\math.h(426) : warning C4091: 'extern __declspec(dllimport ) ' : ignored on left of 'double' when no variable is declared
+TestingDlg2.cpp
+TuningDlg.cpp
+Generating Code...
+Linking...
+
+
+
+<h3>Results</h3>
+myrosot1.exe - 0 error(s), 8 warning(s)
+</pre>
+</body>
+</html>
