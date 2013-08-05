@@ -347,7 +347,11 @@ public:
 
 	BOOL S0S2()
 	{//---- ball in middle (outside goal area but inside centre half line)
-
+		//ADDED
+		if ((BallPos.x<=MIDDLE)&&(!S0S1()))
+			return true;
+		else
+			return false;
 	}
 
 	BOOL S0S3()
@@ -371,7 +375,13 @@ public:
 
 	BOOL S2S1()
 	{//---- ball moves from middle to goal area
-
+		//ADDED
+		if((BallPos.x <= NEARPOS)
+			&& (BallPos.y < (Physical_Yby2 + CLEARYOFFSET)) 
+			&& (BallPos.y > (Physical_Yby2 - CLEARYOFFSET)) )
+			return true;
+		else
+			return false;
 	}
 
 	BOOL S2S3()
