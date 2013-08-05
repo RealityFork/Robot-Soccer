@@ -294,6 +294,25 @@ void position(int which, floatPOINT finalPos, float finalAngle, float finalVel)
 	float D2 = (float)40.0; 
 	float D3 = (float)60.0; //-- VERYLONGDISTANCE 
 	
+	switch(which)
+	{
+	case HGOALIE	:	
+		robotAngle = globaldata.goalieangleS;
+		robotVel = globaldata.goalievelS;
+		robotAngle = globaldata.goalieangleS;
+		break;
+	case HROBOT1	:	
+		robotAngle = globaldata.robot1angleS;					
+		robotVel = globaldata.robot1velS;
+		robotAngle = globaldata.robot1angleS;
+		break;
+	case HROBOT2	:	
+		robotAngle = globaldata.robot2angleS;
+		robotVel = globaldata.robot2velS;
+		robotAngle = globaldata.robot2angleS;
+		break;
+	}	//-- end of switch
+	
 	dx = finalPos.x - robotPos.x; 
 	dy = finalPos.y - robotPos.y; 
 	distanceError = (float) sqrt(dx*dx + dy*dy); 
