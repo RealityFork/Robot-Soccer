@@ -267,10 +267,115 @@ void angleG(float desiredAngle)
 
 void position(int which, floatPOINT finalPos, float finalAngle, float finalVel)
 {
-	int Vl=0, Vr=0;
-
-	velocity(which, Vl, Vr);
-	return;
+	float dx, dy;
+	floatPOINT robotPos, robotVel;
+	float currentVel;
+	float angleError;
+	float robotAngle;
+	float speedError;
+	float desiredAngle;
+	float distanceError;
+	
+	float Kd0;
+	float Kd1;
+	float Kd2;
+	float Kd3;
+	float Kd4;
+	
+	float Kd;
+	float Ka = (float)0.20;
+	float Kdd = 48;
+	float d;
+	
+	float maxAngleError = 70; 
+	int Vl=0, Vr=0; //-- left and right velocities 
+	float D0 = (float)2.5; //-- CLOSEDISTANCE 
+	float D1 = (float)20.0; //-- LONGDISTANCE 
+	float D2 = (float)40.0; 
+	float D3 = (float)60.0; //-- VERYLONGDISTANCE 
+	
+	dx = finalPos.x - robotPos.x; 
+	dy = finalPos.y - robotPos.y; 
+	distanceError = (float) sqrt(dx*dx + dy*dy); 
+	currentVel = (float) sqrt(robotVel.x*robotVel.x + robotVel.y*robotVel.y); 
+	speedError = finalVel - currentVel; 
+	
+	if(distanceError < D0) //---- when near the target position, correct the angle 
+		desiredAngle = finalAngle; 
+	else 
+		desiredAngle = (float) (atan2(dy, dx)*180/PI); //-- in degrees 
+	angleError = desiredAngle - robotAngle; 
+	while (angleError > 180) //-- normalisation for -180 to +180 
+		angleError -= 360; 
+	while (angleError < -180) 
+		angleError += 360; 
+	if (-maxAngleError < angleError && angleError < maxAngleError) 
+		d = 1; 
+	else 
+		if ((180 >= angleError && angleError > 180-maxAngleError) || 
+			(-180 < angleError && angleError <= -180+maxAngleError) ) 
+		{ 
+			if (angleError < -90) //-- switch robot's front direction 
+			{ 
+				angleError += 180; 
+				d = -1; 
+			} 
+			else 
+				if (angleError > 90) 
+				{ 
+					angleError -= 180; 
+					d = -1; 
+				} 
+		} 
+		else 
+			d = 0; 
+		//-- factor to multiply the Kd values 
+		float mulFactor = (float) 1.0; 
+		Kd0 = (float)(3.8*mulFactor); //-- 4.5 
+		Kd1 = (float)(3.8*mulFactor); //-- 4.0 
+		Kd2 = (float)(0.8*mulFactor); 
+		Kd3 = (float)(0.2*mulFactor); 
+		Kd4 = (float)(0.1*mulFactor);
+		
+		if (distanceError > D3) //-- 60 cms 
+		{ 
+			Kd = Kd4; 
+			Kdd = (float)(0.05 * Kdd); 
+		} 
+		else 
+			if (distanceError > D2) //-- 40 cms 
+			{ 
+				Kd = Kd3; 
+				Kdd = (float)(0.05 * Kdd); 
+			} 
+			else 
+				if (distanceError > D1) //-- 20 cms 
+				{ 
+					Kd = Kd2; 
+					Kdd = (float)(0.3 * Kdd); 
+				} 
+				else 
+					if (distanceError>=D0) //-- 2.5 cms 
+					{ 
+						Kd = Kd1; 
+						Kdd = (float)(Kdd*0.5); 
+					} 
+					else //-- distanceError<D0 (2.5 cms) i.e. very close to final position, just turn 
+					{ 
+						angle(which, finalAngle); 
+					} 
+					if (distanceError>=D0) //-- 2.5 cms 
+					{ 
+						Vl = (int) (Kd*distanceError + Kdd*speedError)*d - Ka*angleError; 
+						Vr = (int) (Kd*distanceError + Kdd*speedError)*d + Ka*angleError; 
+						velocity(which, Vl, Vr); 
+					} 
+					if(d==0 && distanceError>=D0) //-- no linear movement, just turn 
+					{ 
+						angle(which, desiredAngle); 
+					} 
+					
+					return;
 }	//-- position()
 
 
