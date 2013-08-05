@@ -299,17 +299,17 @@ void position(int which, floatPOINT finalPos, float finalAngle, float finalVel)
 	case HGOALIE	:	
 		robotAngle = globaldata.goalieangleS;
 		robotVel = globaldata.goalievelS;
-		robotAngle = globaldata.goalieangleS;
+		robotPos = globaldata.goalieposS;
 		break;
 	case HROBOT1	:	
 		robotAngle = globaldata.robot1angleS;					
 		robotVel = globaldata.robot1velS;
-		robotAngle = globaldata.robot1angleS;
+		robotPos = globaldata.robot1posS;
 		break;
 	case HROBOT2	:	
 		robotAngle = globaldata.robot2angleS;
 		robotVel = globaldata.robot2velS;
-		robotAngle = globaldata.robot2angleS;
+		robotPos = globaldata.robot2posS;
 		break;
 	}	//-- end of switch
 	
