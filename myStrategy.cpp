@@ -337,7 +337,7 @@ public:
 
 	BOOL S0S1()
 	{ //---- ball in goal area
-		if ((BallPos.x <= NEARPOS)
+		if ((BallPos.x <= NEARPOS+20)
 			&& (BallPos.y < (Physical_Yby2 + CLEARYOFFSET)) 
 			&& (BallPos.y > (Physical_Yby2 - CLEARYOFFSET)) )//ball in near
 			return true;
@@ -347,8 +347,7 @@ public:
 
 	BOOL S0S2()
 	{//---- ball in middle (outside goal area but inside centre half line)
-		//ADDED
-		if ((BallPos.x<=MIDDLE)&&(!S0S1()))
+		if((!S0S1()) && (BallPos.x < MIDDLE))
 			return true;
 		else
 			return false;
@@ -375,10 +374,9 @@ public:
 
 	BOOL S2S1()
 	{//---- ball moves from middle to goal area
-		//ADDED
-		if((BallPos.x <= NEARPOS)
+		if ((BallPos.x <= NEARPOS+20)
 			&& (BallPos.y < (Physical_Yby2 + CLEARYOFFSET)) 
-			&& (BallPos.y > (Physical_Yby2 - CLEARYOFFSET)) )
+			&& (BallPos.y > (Physical_Yby2 - CLEARYOFFSET)) )//ball in near
 			return true;
 		else
 			return false;
@@ -419,6 +417,33 @@ public:
 	void S2()	//-- track ball y position + predict shot
 	{	
 		//-- calculate final position for the goalkeeper
+		finalPos.x = GOALIESTANDX+20;
+
+
+		if(Ballspeed >= 0.5){
+		globaldata.ballAngleAve = (globaldata.ballangleS + globaldata.ballAngleAve*5)/6;
+		}
+		float ballAngle = 0;
+		if (globaldata.ballAngleAve > 0)
+			ballAngle = -(globaldata.ballAngleAve - 90);
+		else
+			ballAngle = -(globaldata.ballAngleAve + 90);
+		
+
+		if(Ballspeed >= 0.5){
+		finalPos.y = BallPos.y - ((BallPos.x - globaldata.goalieposS.x)/tan(ballAngle));
+		}
+		else
+		finalPos.y = BallPos.y;
+		
+
+		if(finalPos.y > Physical_Yby2 + CLEARYOFFSET)
+			finalPos.y = Physical_Yby2 + CLEARYOFFSET;
+
+		if(finalPos.y < Physical_Yby2 - CLEARYOFFSET)
+			finalPos.y = Physical_Yby2 - CLEARYOFFSET;
+
+		globaldata.predicted = finalPos;
 
 		positionG(finalPos, 90, 0);
 		avoidBound(which,finalPos);
@@ -428,15 +453,15 @@ public:
 	void S3()//----	Idle in the centre of the goal
 	{
 		floatPOINT finalPos;
-		finalPos.x = GOALIESTANDX;
+		finalPos.x = GOALIESTANDX+20;
 		finalPos.y = Physical_Yby2;
 
 		//---- Add code here to limit tracking y to penalty area boundary
 		//----------------------------------------------------------
 
 		positionG(finalPos, 90, 0);
-		avoidBound(which, finalPos);
-		escapeGoal(which);
+		//avoidBound(which, finalPos);
+		//escapeGoal(which);
 	}
 
 	//-- Run function

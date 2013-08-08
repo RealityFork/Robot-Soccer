@@ -205,6 +205,10 @@ struct commondata
 
 	BOOL IRQEnabled;	//-- has the IRQ been enabled?
 
+	//ELLIOT
+	floatPOINT predicted;
+	float ballAngleAve;
+
 };	//-- end of structure commondata
 
 struct not_found_count
