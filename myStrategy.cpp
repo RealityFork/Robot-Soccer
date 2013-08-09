@@ -431,7 +431,7 @@ public:
 		
 
 		if(Ballspeed >= 0.5){
-		finalPos.y = BallPos.y - ((BallPos.x - globaldata.goalieposS.x)/tan(ballAngle));
+		finalPos.y = BallPos.y - ((BallPos.x - globaldata.goalieposS.x)/tan(ballAngle * 3.14159265 / 180.0));
 		}
 		else
 		finalPos.y = BallPos.y;
