@@ -424,18 +424,27 @@ public:
 		globaldata.ballAngleAve = (globaldata.ballangleS + globaldata.ballAngleAve*5)/6;
 		}
 		float ballAngle = 0;
-		if (globaldata.ballAngleAve > 0)
-			ballAngle = -(globaldata.ballAngleAve - 90);
-		else
-			ballAngle = -(globaldata.ballAngleAve + 90);
+		float ballAngleActual = globaldata.ballangleS; //or... = globaldata.ballAngleAve;
+
+		if(ballAngleActual > 90)//90 to 180
+			ballAngle = ballAngleActual - 90;
+		else if(ballAngleActual > 0)//0 to 90
+			ballAngle = 90;
+		else if(ballAngleActual < -90)//-90 to -180
+			ballAngle = ballAngleActual + 90;
+		else //0 to -90
+			ballAngle = 90;
+
+		//if (ballAngleActual > 0)
+		//	ballAngle = -(globaldata.ballAngleAve - 90);
+		//else 
+		//	ballAngle = -(globaldata.ballAngleAve + 90);
 		
 
-		if(Ballspeed >= 0.5){
-		finalPos.y = BallPos.y - ((BallPos.x - globaldata.goalieposS.x)/tan(ballAngle * 3.14159265 / 180.0));
-		}
-		else
-		finalPos.y = BallPos.y;
-		
+		//Might need to change +/- here...
+		//------------------->here<
+		finalPos.y = BallPos.y - ((BallPos.x - finalPos.x)/tan(ballAngle * 3.14159265 / 180.0));
+
 
 		if(finalPos.y > Physical_Yby2 + CLEARYOFFSET)
 			finalPos.y = Physical_Yby2 + CLEARYOFFSET;
