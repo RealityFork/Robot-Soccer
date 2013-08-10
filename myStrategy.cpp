@@ -426,14 +426,19 @@ public:
 		float ballAngle = 0;
 		float ballAngleActual = globaldata.ballangleS; //or... = globaldata.ballAngleAve;
 
+		//May need to flip angle
+		//ballAngleActual = -ballAngleActual;
+
+
+
 		if(ballAngleActual > 90)//90 to 180
 			ballAngle = ballAngleActual - 90;
 		else if(ballAngleActual > 0)//0 to 90
-			ballAngle = 90;
+			ballAngle = 0;
 		else if(ballAngleActual < -90)//-90 to -180
 			ballAngle = ballAngleActual + 90;
 		else //0 to -90
-			ballAngle = 90;
+			ballAngle = 0;
 
 		//if (ballAngleActual > 0)
 		//	ballAngle = -(globaldata.ballAngleAve - 90);
