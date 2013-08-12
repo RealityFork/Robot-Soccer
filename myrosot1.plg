@@ -6,32 +6,13 @@
 --------------------Configuration: myrosot1 - Win32 Release--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating command line "rc.exe /l 0x409 /fo"Release/myrosot1.res" /d "NDEBUG" /d "_AFXDLL" "C:\Documents and Settings\gsengupt\Desktop\NIVA-Skeleton\myrosot1.rc"" 
-Creating temporary file "C:\DOCUME~1\gsengupt\LOCALS~1\Temp\RSP8.tmp" with contents
+Creating temporary file "C:\DOCUME~1\hjfagg\LOCALS~1\Temp\RSPBE.tmp" with contents
 [
-/nologo /G5 /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /Fp"Release/myrosot1.pch" /Yu"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
-"C:\Documents and Settings\gsengupt\Desktop\NIVA-Skeleton\AdjColDlg.cpp"
-"C:\Documents and Settings\gsengupt\Desktop\NIVA-Skeleton\AdjGameArea.cpp"
-"C:\Documents and Settings\gsengupt\Desktop\NIVA-Skeleton\controlalgo.cpp"
-"C:\Documents and Settings\gsengupt\Desktop\NIVA-Skeleton\GrabberSettingsDlg.cpp"
-"C:\Documents and Settings\gsengupt\Desktop\NIVA-Skeleton\map.cpp"
-"C:\Documents and Settings\gsengupt\Desktop\NIVA-Skeleton\myrosot1.cpp"
-"C:\Documents and Settings\gsengupt\Desktop\NIVA-Skeleton\myrosot1Dlg.cpp"
-"C:\Documents and Settings\gsengupt\Desktop\NIVA-Skeleton\myStrategy.cpp"
-"C:\Documents and Settings\gsengupt\Desktop\NIVA-Skeleton\Parameters.cpp"
-"C:\Documents and Settings\gsengupt\Desktop\NIVA-Skeleton\RFComm.cpp"
-"C:\Documents and Settings\gsengupt\Desktop\NIVA-Skeleton\RFCommDlg.cpp"
-"C:\Documents and Settings\gsengupt\Desktop\NIVA-Skeleton\TestingDlg2.cpp"
-"C:\Documents and Settings\gsengupt\Desktop\NIVA-Skeleton\TuningDlg.cpp"
+/nologo /G5 /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /FR"Release/" /Fp"Release/myrosot1.pch" /Yu"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
+"G:\Robot-Soccer\myStrategy.cpp"
 ]
-Creating command line "cl.exe @C:\DOCUME~1\gsengupt\LOCALS~1\Temp\RSP8.tmp" 
-Creating temporary file "C:\DOCUME~1\gsengupt\LOCALS~1\Temp\RSP9.tmp" with contents
-[
-/nologo /G5 /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /Fp"Release/myrosot1.pch" /Yc"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
-"C:\Documents and Settings\gsengupt\Desktop\NIVA-Skeleton\StdAfx.cpp"
-]
-Creating command line "cl.exe @C:\DOCUME~1\gsengupt\LOCALS~1\Temp\RSP9.tmp" 
-Creating temporary file "C:\DOCUME~1\gsengupt\LOCALS~1\Temp\RSPA.tmp" with contents
+Creating command line "cl.exe @C:\DOCUME~1\hjfagg\LOCALS~1\Temp\RSPBE.tmp" 
+Creating temporary file "C:\DOCUME~1\hjfagg\LOCALS~1\Temp\RSPBF.tmp" with contents
 [
 winmm.lib user32.lib fbus32.lib /nologo /subsystem:windows /incremental:yes /pdb:"Release/myrosot1.pdb" /machine:I386 /out:"Release/myrosot1.exe" 
 ".\Release\AdjColDlg.obj"
@@ -51,40 +32,42 @@ winmm.lib user32.lib fbus32.lib /nologo /subsystem:windows /incremental:yes /pdb
 ".\vision.obj"
 ".\Release\myrosot1.res"
 ]
-Creating command line "link.exe @C:\DOCUME~1\gsengupt\LOCALS~1\Temp\RSPA.tmp"
+Creating command line "link.exe @C:\DOCUME~1\hjfagg\LOCALS~1\Temp\RSPBF.tmp"
 <h3>Output Window</h3>
-Compiling resources...
 Compiling...
-StdAfx.cpp
-Compiling...
-AdjColDlg.cpp
-AdjGameArea.cpp
-C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\math.h(426) : warning C4091: 'extern __declspec(dllimport ) ' : ignored on left of 'double' when no variable is declared
-controlalgo.cpp
-C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\math.h(426) : warning C4091: 'extern __declspec(dllimport ) ' : ignored on left of 'double' when no variable is declared
-GrabberSettingsDlg.cpp
-C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\math.h(426) : warning C4091: 'extern __declspec(dllimport ) ' : ignored on left of 'double' when no variable is declared
-map.cpp
-C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\math.h(426) : warning C4091: 'extern __declspec(dllimport ) ' : ignored on left of 'double' when no variable is declared
-myrosot1.cpp
-myrosot1Dlg.cpp
-C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\math.h(426) : warning C4091: 'extern __declspec(dllimport ) ' : ignored on left of 'double' when no variable is declared
 myStrategy.cpp
 C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\math.h(426) : warning C4091: 'extern __declspec(dllimport ) ' : ignored on left of 'double' when no variable is declared
-Parameters.cpp
-RFComm.cpp
-C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\math.h(426) : warning C4091: 'extern __declspec(dllimport ) ' : ignored on left of 'double' when no variable is declared
-RFCommDlg.cpp
-C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\math.h(426) : warning C4091: 'extern __declspec(dllimport ) ' : ignored on left of 'double' when no variable is declared
-TestingDlg2.cpp
-TuningDlg.cpp
-Generating Code...
+G:\Robot-Soccer\myStrategy.cpp(437) : warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+G:\Robot-Soccer\myStrategy.cpp(477) : warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+G:\Robot-Soccer\myStrategy.cpp(489) : warning C4305: '=' : truncation from 'const double' to 'float'
+G:\Robot-Soccer\myStrategy.cpp(536) : warning C4305: '=' : truncation from 'const double' to 'float'
+G:\Robot-Soccer\myStrategy.cpp(538) : warning C4305: '=' : truncation from 'const double' to 'float'
 Linking...
+Creating temporary file "C:\DOCUME~1\hjfagg\LOCALS~1\Temp\RSPC0.tmp" with contents
+[
+/nologo /o"Release/myrosot1.bsc" 
+".\Release\StdAfx.sbr"
+".\Release\AdjColDlg.sbr"
+".\Release\AdjGameArea.sbr"
+".\Release\controlalgo.sbr"
+".\Release\GrabberSettingsDlg.sbr"
+".\Release\map.sbr"
+".\Release\myrosot1.sbr"
+".\Release\myrosot1Dlg.sbr"
+".\Release\myStrategy.sbr"
+".\Release\Parameters.sbr"
+".\Release\RFComm.sbr"
+".\Release\RFCommDlg.sbr"
+".\Release\TestingDlg2.sbr"
+".\Release\TuningDlg.sbr"]
+Creating command line "bscmake.exe @C:\DOCUME~1\hjfagg\LOCALS~1\Temp\RSPC0.tmp"
+Creating browse info file...
+<h3>Output Window</h3>
 
 
 
 <h3>Results</h3>
-myrosot1.exe - 0 error(s), 8 warning(s)
+myrosot1.exe - 0 error(s), 6 warning(s)
 </pre>
 </body>
 </html>

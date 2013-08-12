@@ -8,6 +8,7 @@
 #include "map.h"
 #include "myStrategy.h"
 
+
 void angle(int which, float desiredAngle)
 {
 	float robotAngle;
@@ -50,7 +51,7 @@ void angle(int which, float desiredAngle)
 			angleError -= 180;
 		}
 
-	float mulFactor = (float)0.88;	//1.1
+	float mulFactor = (float)0.5; //0.88	//1.1
 
 	Ka70 = (float)0.2857*mulFactor;
 	Ka50 = (float)0.3429*mulFactor;
@@ -265,145 +266,142 @@ void angleG(float desiredAngle)
 }	//-- angleG()
 
 
+
+
+
+
+
 void position(int which, floatPOINT finalPos, float finalAngle, float finalVel)
 {
-	float dx, dy;
-	floatPOINT robotPos, robotVel;
-	float currentVel;
-	float angleError;
-	float robotAngle;
-	float speedError;
-	float desiredAngle;
-	float distanceError;
-	
-	float Kd0;
-	float Kd1;
-	float Kd2;
-	float Kd3;
-	float Kd4;
-	
-	float Kd;
-	float Ka = (float)0.20;
+	float maxAngleError = 70;
+	int Vl=0, Vr=0; //-- left and right velocities
 	float Kdd = 48;
-	float d;
-	
-	float maxAngleError = 70; 
-	int Vl=0, Vr=0; //-- left and right velocities 
-	float D0 = (float)2.5; //-- CLOSEDISTANCE 
-	float D1 = (float)20.0; //-- LONGDISTANCE 
-	float D2 = (float)40.0; 
-	float D3 = (float)60.0; //-- VERYLONGDISTANCE 
-	
+
+	float kDeriv = 0;
+
+	float D0 = (float)2.5; //-- CLOSEDISTANCE
+	float D1 = (float)20.0; //-- LONGDISTANCE
+	float D2 = (float)40.0;
+	float D3 = (float)60.0; //-- VERYLONGDISTANCE
+
+	float Ka = 0.15; 
+	float dx, dy, Kd0, Kd1, Kd2, Kd3, Kd4, distanceError, currentVel,speedError, desiredAngle, angleError, robotAngle, d, Kd, CosFactor;
+	floatPOINT robotVel, robotPos;
+	float* updateOldError, derivPosError;
+
 	switch(which)
 	{
-	case HGOALIE	:	
-		robotAngle = globaldata.goalieangleS;
-		robotVel = globaldata.goalievelS;
-		robotPos = globaldata.goalieposS;
-		break;
-	case HROBOT1	:	
-		robotAngle = globaldata.robot1angleS;					
-		robotVel = globaldata.robot1velS;
-		robotPos = globaldata.robot1posS;
-		break;
-	case HROBOT2	:	
-		robotAngle = globaldata.robot2angleS;
-		robotVel = globaldata.robot2velS;
-		robotPos = globaldata.robot2posS;
-		break;
+	case HGOALIE:
+			robotAngle = globaldata.goalieangleS;
+			robotPos = globaldata.goalieposS;
+			robotVel = globaldata.goalievelS;
+			updateOldError = &globaldata.goalieOldDistError;
+			break;
+	case HROBOT1:
+			robotAngle = globaldata.robot1angleS;
+			robotPos = globaldata.robot1posS;
+			robotVel = globaldata.robot1velS;
+			updateOldError = &globaldata.robot1OldDistError;
+			break;
+	case HROBOT2:	
+			robotAngle = globaldata.robot2angleS;
+			robotPos = globaldata.robot2posS;
+			robotVel = globaldata.robot2velS;
+			updateOldError = &globaldata.robot2OldDIstError;
+			break;
 	}	//-- end of switch
+
+
+
+
+	dx = finalPos.x - robotPos.x;
+	dy = finalPos.y - robotPos.y;
+
+	distanceError = (float) sqrt(dx*dx + dy*dy);
+	derivPosError = *updateOldError - distanceError;
+
+	currentVel = (float) sqrt(robotVel.x*robotVel.x + robotVel.y*robotVel.y);
+	speedError = finalVel - currentVel;
+
+	if(distanceError < D0) //---- when near the target position, correct the angle
+		desiredAngle = finalAngle;
+	else
+		desiredAngle = (float) (atan2(dy, dx)*180/PI); //-- in degrees
+
+	angleError = desiredAngle - robotAngle;
+	while (angleError > 180) //-- normalisation for -180 to +180
+		angleError -= 360;
+	while (angleError < -180)
+		angleError += 360;
+
+	if (-maxAngleError < angleError && angleError < maxAngleError)
+		d = 1;
+	else
+		if ((180 >= angleError && angleError > 180-maxAngleError) ||
+		(-180 < angleError && angleError <= -180+maxAngleError) )
+		{
+			if (angleError < -90) //-- switch robot's front direction
+			{
+				angleError += 180;
+				d = -1;
+			}
+			else
+			if (angleError > 90)
+			{
+				angleError -= 180;
+				d = -1;
+			}
+		}
+		else
+			d = 0;
+
+	//-- factor to multiply the Kd values
+	float mulFactor = (float) 1.0;
+
+	Kd0 = (float)(3.8*mulFactor); //-- 4.5
+	Kd1 = (float)(3.8*mulFactor); //-- 4.0
+	Kd2 = (float)(2.0*mulFactor);
+	Kd3 = (float)(1.0*mulFactor);
+	Kd4 = (float)(0.5*mulFactor);
 	
-	dx = finalPos.x - robotPos.x; 
-	dy = finalPos.y - robotPos.y; 
-	distanceError = (float) sqrt(dx*dx + dy*dy); 
-	currentVel = (float) sqrt(robotVel.x*robotVel.x + robotVel.y*robotVel.y); 
-	speedError = finalVel - currentVel; 
+	int dis = (distanceError > 50.0 ? 50 : (int)distanceError); // Limit distance so that Kd can't get too small.
+	Kd = (float)(60-dis)/18;
+	Kdd = (float)(0.05 * Kdd);
+
+	if (distanceError<D0) // We're there. Orient.
+	{
+		angle(which, finalAngle);
+	}
+	else // we still have a distance error
+	{
+		if (d == 0) // Angle is quite large. Turn first.
+			angle(which, desiredAngle);
+		else
+		{
+			CosFactor = (float) fabs( cos(angleError*PI/180) );
+			Vl = (int) (Kd*distanceError*CosFactor + Kdd*speedError + kDeriv*derivPosError)*d - Ka*angleError;
+			Vr = (int) (Kd*distanceError*CosFactor + Kdd*speedError + kDeriv*derivPosError)*d + Ka*angleError;		
+
+			velocity(which, Vl, Vr);
+		}
+	}	
 	
-	if(distanceError < D0) //---- when near the target position, correct the angle 
-		desiredAngle = finalAngle; 
-	else 
-		desiredAngle = (float) (atan2(dy, dx)*180/PI); //-- in degrees 
-	angleError = desiredAngle - robotAngle; 
-	while (angleError > 180) //-- normalisation for -180 to +180 
-		angleError -= 360; 
-	while (angleError < -180) 
-		angleError += 360; 
-	if (-maxAngleError < angleError && angleError < maxAngleError) 
-		d = 1; 
-	else 
-		if ((180 >= angleError && angleError > 180-maxAngleError) || 
-			(-180 < angleError && angleError <= -180+maxAngleError) ) 
-		{ 
-			if (angleError < -90) //-- switch robot's front direction 
-			{ 
-				angleError += 180; 
-				d = -1; 
-			} 
-			else 
-				if (angleError > 90) 
-				{ 
-					angleError -= 180; 
-					d = -1; 
-				} 
-		} 
-		else 
-			d = 0; 
-		//-- factor to multiply the Kd values 
-		float mulFactor = (float) 1.0; 
-		Kd0 = (float)(3.8*mulFactor); //-- 4.5 
-		Kd1 = (float)(3.8*mulFactor); //-- 4.0 
-		Kd2 = (float)(0.8*mulFactor); 
-		Kd3 = (float)(0.2*mulFactor); 
-		Kd4 = (float)(0.1*mulFactor);
-		
-		if (distanceError > D3) //-- 60 cms 
-		{ 
-			Kd = Kd4; 
-			Kdd = (float)(0.05 * Kdd); 
-		} 
-		else 
-			if (distanceError > D2) //-- 40 cms 
-			{ 
-				Kd = Kd3; 
-				Kdd = (float)(0.05 * Kdd); 
-			} 
-			else 
-				if (distanceError > D1) //-- 20 cms 
-				{ 
-					Kd = Kd2; 
-					Kdd = (float)(0.3 * Kdd); 
-				} 
-				else 
-					if (distanceError>=D0) //-- 2.5 cms 
-					{ 
-						Kd = Kd1; 
-						Kdd = (float)(Kdd*0.5); 
-					} 
-					else //-- distanceError<D0 (2.5 cms) i.e. very close to final position, just turn 
-					{ 
-						angle(which, finalAngle); 
-					} 
-					if (distanceError>=D0) //-- 2.5 cms 
-					{ 
-						Vl = (int) (Kd*distanceError + Kdd*speedError)*d - Ka*angleError; 
-						Vr = (int) (Kd*distanceError + Kdd*speedError)*d + Ka*angleError; 
-						velocity(which, Vl, Vr); 
-					} 
-					if(d==0 && distanceError>=D0) //-- no linear movement, just turn 
-					{ 
-						angle(which, desiredAngle); 
-					} 
-					
-					return;
+	*updateOldError = distanceError;
+	
+	
 }	//-- position()
+
+
+
+
+
+
 
 
 //-- position() function exclusively for Goalie -------------------
 void positionG(floatPOINT finalPos, float finalAngle, float finalVel)
 {
-	int Vl=0, Vr=0;
-
-	velocity(HGOALIE, Vl, Vr);
+	position(HGOALIE, finalPos, finalAngle, finalVel);
 	return;
 }	//-- positionG()
 

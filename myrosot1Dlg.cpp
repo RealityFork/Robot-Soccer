@@ -2573,6 +2573,11 @@ void CMyrosot1Dlg::OnLButtonDblClk(UINT nFlags, CPoint point)
 	myColour = RGB(255, 150, 0);
 	objDC.FillSolidRect((int)pdata->ballpos.x-2, (int)pdata->ballpos.y-2, 4, 4, myColour);
 
+	//ELLIOT
+	myColour = RGB(50, 50, 255);
+	objDC.FillSolidRect((int)pdata->predicted.x-2, (int)pdata->predicted.y-2, 4, 4, myColour);
+	m_Robot1angle.Format("%7.2f", pdata->ballAngleAve);
+
 	//-- display the opponent robot labels
 	if (gTrackOpponent)
 	{
@@ -2593,6 +2598,8 @@ void CMyrosot1Dlg::OnLButtonDblClk(UINT nFlags, CPoint point)
 
 	CDialog::OnLButtonDblClk(nFlags, point);
 }
+
+
 
 void CMyrosot1Dlg::OnRButtonDblClk(UINT nFlags, CPoint point) 
 {

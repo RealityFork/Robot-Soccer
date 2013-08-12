@@ -260,6 +260,7 @@ public:
 
 };	//-- CPlaceRobots class definition ends here
 
+
 class CGoalieAction //----- To defend the goal from attack by opponent
 {
 //  Has four states S0, S1, S2, S3
@@ -283,22 +284,26 @@ private:
 	floatPOINT GPos;
 	float GAngle;
 	float GOALIESTANDX;
-	//-- declare more variables as required ---------
+
+
 	
 public:
-	CGoalieAction(int w, int *ps) 
+	CGoalieAction(int w, int *ps)
 	{ 
 		floatPOINT nearpoint;
 		floatPOINT homegoalbottom;
 		pstate = ps ;  
 		which = w;
-		MIDDLE = Physical_Xby2 + 30;
+		MIDDLE = Physical_Xby2;
+		homegoalbottom.x = (float)globaldata.homegoalbottom.x;
+		homegoalbottom.y = (float)globaldata.homegoalbottom.y;
 		mapxy(&homegoalbottom,&nearpoint,&globaldata);
 		XHYSTERESIS = 3.0;
 		YHYSTERESIS = 2.0;
 		NEARPOS = nearpoint.x + XHYSTERESIS;
 		float Balldx=globaldata.ballvelS.x;
 		float Balldy=globaldata.ballvelS.y;
+
 
 		BallPos = globaldata.GballposS;
 		Ballspeed = (float)sqrt(Balldx*Balldx + Balldy*Balldy);
@@ -318,11 +323,7 @@ public:
 
 		GAngle = globaldata.goalieangleS;
 
-		GOALIESTANDX = (NEARPOS-XHYSTERESIS)/2 - gGoalieActionParameters.GXcompensation;
-
-		//-- add more code here as required ------
-
-
+		GOALIESTANDX = nearpoint.x/2 + 5;// - gGoalieActionParameters.GXcompensation;
 	}
 	~CGoalieAction(){}
 
@@ -333,11 +334,10 @@ public:
 //	S2S3, S2S1,
 //	S3S2
 
-	//-- write code for the switching/transition functions here -----
 
 	BOOL S0S1()
 	{ //---- ball in goal area
-		if ((BallPos.x <= NEARPOS+20)
+		if ((BallPos.x <= NEARPOS)
 			&& (BallPos.y < (Physical_Yby2 + CLEARYOFFSET)) 
 			&& (BallPos.y > (Physical_Yby2 - CLEARYOFFSET)) )//ball in near
 			return true;
@@ -374,8 +374,8 @@ public:
 
 	BOOL S2S1()
 	{//---- ball moves from middle to goal area
-		if ((BallPos.x <= NEARPOS+20)
-			&& (BallPos.y < (Physical_Yby2 + CLEARYOFFSET)) 
+		if ((BallPos.x <= NEARPOS)
+			&& (BallPos.y < (Physical_Yby2 + CLEARYOFFSET))
 			&& (BallPos.y > (Physical_Yby2 - CLEARYOFFSET)) )//ball in near
 			return true;
 		else
@@ -405,27 +405,41 @@ public:
 	//void S0() {}; // No Action for Initialisation State
 
 	void S1() //-- clear the ball 
-				//-- write code here which makes the goalkeeper clear the ball
 	{
-		float FINALVELOCITY = (float)0.88;
+		float FINALVELOCITY = (float)10;
 
 		positionG(BallPos, 90, FINALVELOCITY);
 		avoidBound(which,BallPos);
 		escapeGoal(which);
+		
 	}
 
 	void S2()	//-- track ball y position + predict shot
 	{	
 		//-- calculate final position for the goalkeeper
-		finalPos.x = GOALIESTANDX+20;
+		finalPos.x = GOALIESTANDX;
 
+		// Take a ball velocity sample
+		globaldata.ballVelSamples[globaldata.ballVelIndex].x = globaldata.ballvel.x;
+		globaldata.ballVelSamples[globaldata.ballVelIndex].y = globaldata.ballvel.y;
+		globaldata.ballAngleAve = globaldata.ballVelIndex;
 
-		if(Ballspeed >= 0.5){
-		globaldata.ballAngleAve = (globaldata.ballangleS + globaldata.ballAngleAve*5)/6;
+		globaldata.ballVelIndex = (globaldata.ballVelIndex+1) % ballVelNSamples;
+		floatPOINT ballVelAve;
+		ballVelAve.x = 0;
+		ballVelAve.y = 0;
+
+		// Sum x and y samples
+		for (int i = 0; i < ballVelNSamples; i++)
+		{
+			ballVelAve.x += globaldata.ballVelSamples[i].x;
+			ballVelAve.y += globaldata.ballVelSamples[i].y;
 		}
-		float ballAngle = 0;
-		float ballAngleActual = globaldata.ballangleS; //or... = globaldata.ballAngleAve;
 
+		
+		float ballAngleActual = (float)atan2(ballVelAve.y, ballVelAve.x)*180/PI;
+		
+		float ballAngle = 0;
 		if(ballAngleActual > 90)//90 to 180
 			ballAngle = ballAngleActual - 90;
 		else if(ballAngleActual > 0)//0 to 90
@@ -433,44 +447,43 @@ public:
 		else if(ballAngleActual < -90)//-90 to -180
 			ballAngle = ballAngleActual + 90;
 		else //0 to -90
-			ballAngle = 90;
-
-		//if (ballAngleActual > 0)
-		//	ballAngle = -(globaldata.ballAngleAve - 90);
-		//else 
-		//	ballAngle = -(globaldata.ballAngleAve + 90);
+		ballAngle = 90;
 		
 
-		//Might need to change +/- here...
-		//------------------->here<
-		finalPos.y = BallPos.y - ((BallPos.x - finalPos.x)/tan(ballAngle * 3.14159265 / 180.0));
+		// Predict the final Y position of the ball.
+		finalPos.y = (BallPos.y - ((BallPos.x - finalPos.x)/tan(ballAngle * 3.14159265 / 180.0)));
 
+		// Set hard limits for this state
+		if (finalPos.y > Physical_Yby2 + (Physical_Yby2/3.5))
+			finalPos.y = Physical_Yby2 + (Physical_Yby2/2.5);	
+		if (finalPos.y < Physical_Yby2 - (Physical_Yby2/3.5))
+			finalPos.y = Physical_Yby2 - (Physical_Yby2/3.5);
 
-		if(finalPos.y > Physical_Yby2 + CLEARYOFFSET)
-			finalPos.y = Physical_Yby2 + CLEARYOFFSET;
-
-		if(finalPos.y < Physical_Yby2 - CLEARYOFFSET)
-			finalPos.y = Physical_Yby2 - CLEARYOFFSET;
-
-		globaldata.predicted = finalPos;
+		// Convert predicted co ords back to screen co ords for display:
+		inversemapxy(&globaldata.predicted,&finalPos,&globaldata);
 
 		positionG(finalPos, 90, 0);
 		avoidBound(which,finalPos);
 		escapeGoal(which);
 	}
 
-	void S3()//----	Idle in the centre of the goal
+	void S3()//----	Follow the ball's current Y position
 	{
 		floatPOINT finalPos;
-		finalPos.x = GOALIESTANDX+20;
-		finalPos.y = Physical_Yby2;
+		finalPos.x = GOALIESTANDX;
+		finalPos.y = BallPos.y;
 
-		//---- Add code here to limit tracking y to penalty area boundary
-		//----------------------------------------------------------
+		// Hard limits
+		if (finalPos.y > Physical_Yby2 + (Physical_Yby2/3.5))
+			finalPos.y = Physical_Yby2 + (Physical_Yby2/3.5);	
+		if (finalPos.y < Physical_Yby2 - (Physical_Yby2/3.5))
+			finalPos.y = Physical_Yby2 - (Physical_Yby2/3.5);
+
+		globaldata.predicted = finalPos;
 
 		positionG(finalPos, 90, 0);
-		//avoidBound(which, finalPos);
-		//escapeGoal(which);
+		avoidBound(which,finalPos);
+		escapeGoal(which);
 	}
 
 	//-- Run function
@@ -485,6 +498,7 @@ public:
 			else 
 			{
 			// Give error alert message;
+				MessageBox( NULL, TEXT("State transtition error"), TEXT("Error"), MB_OK );
 			}
 			break;
 
@@ -505,6 +519,7 @@ public:
 			break;
 
 		default: // Give error alert message
+			MessageBox( NULL, TEXT("State transtition error"), TEXT("Error"), MB_OK );
 			break;
 		}
 		return;
@@ -817,3 +832,4 @@ void myStrategy()
 
 	return;
 }	//-- myStrategy()
+

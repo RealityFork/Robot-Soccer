@@ -205,9 +205,24 @@ struct commondata
 
 	BOOL IRQEnabled;	//-- has the IRQ been enabled?
 
+	float goalieOldDistError;
+	float robot1OldDistError;
+	float robot2OldDIstError;
+
 	//ELLIOT
 	floatPOINT predicted;
 	float ballAngleAve;
+
+	//BEN
+	float ballXAve;
+
+	// Hamish
+	
+#define ballVelNSamples 10
+
+	floatPOINT ballVelSamples[ballVelNSamples];
+	int ballVelIndex;
+
 
 };	//-- end of structure commondata
 
