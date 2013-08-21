@@ -1,0 +1,88 @@
+----------------
+Player Behaviour
+----------------
+
+We shall describe here how the striker and defender should act. Once we do this, we can begin to implement all of the actions listed below, and we will be on our way.
+
+
+
+
+
+
+
+
+-------
+STRIKER
+-------
+
+S0 - Initialisation
+-------------------
+
+- Initialise stuff
+
+
+
+S1 - Get the ball
+-------------------
+
+- Go to the ball location, unless an opponent has it (see S2)
+- Approach the ball at an angle so that a shot can be made
+
+
+
+S2 - Tackle
+------------------
+
+- Track the the opposition with the ball, and their speed.
+- Approach the opposition from the side
+- Time the approach to take the ball off of the opponent, or smash into them. Whatevs.
+
+
+S3 - Defend
+------------------
+
+- If the ball goes into the defensive half, go back and help
+- Perhaps the striker could adopt a defender behaviour instance here?
+
+
+
+
+
+
+--------
+DEFENDER
+--------
+
+S0 - Initialisation
+-------------------
+
+- Initialise stuff
+
+
+
+S1 - Track
+-------------------
+
+- Sit in front of the goalie some distance and track the ball
+
+
+
+S2 - Tackle
+------------------
+
+- If the ball is behind tracking position, go and get the ball
+
+
+
+S3 - Clear
+------------------
+
+- If we have the ball, drive it up towards the goal
+
+
+
+S4 - Assist
+------------------
+
+- If the ball is in the opponent half, sit on the center dot
+- Prepare to make a full speed shot if the ball pops out towards us (one timer!)
