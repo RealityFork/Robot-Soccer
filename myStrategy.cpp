@@ -527,6 +527,408 @@ public:
 
 };	//-- CGoalieAction class definition ends here
 
+class CStrikerAction //----- To attack
+{
+private:
+	float MIDDLE;
+	float NEARPOS;
+	float XHYSTERESIS;
+	float YHYSTERESIS;
+	float HALF_GOALSIZE;
+	float CLEARYOFFSET;
+	int *pstate;
+	int which; //---- which robot we're referring to
+	floatPOINT BallPos;
+	float Ballspeed;
+	floatPOINT finalPos;
+	floatPOINT GPos;
+	float GAngle;
+	float GOALIESTANDX;
+	
+	float FARPOS;
+
+
+	
+public:
+	CStrikerAction(int w, int *ps)
+	{ 
+		floatPOINT nearpoint;
+		floatPOINT homegoalbottom, oppgoalbottom;
+		pstate = ps ;  
+		which = w;
+		MIDDLE = Physical_Xby2;
+		homegoalbottom.x = (float)globaldata.homegoalbottom.x;
+		homegoalbottom.y = (float)globaldata.homegoalbottom.y;
+		mapxy(&homegoalbottom,&nearpoint,&globaldata);
+		XHYSTERESIS = 3.0;
+		YHYSTERESIS = 2.0;
+		NEARPOS = nearpoint.x + XHYSTERESIS;
+		oppgoalbottom.x = (float)globaldata.oppgoalbottom.x;
+		oppgoalbottom.y = (float)globaldata.oppgoalbottom.y;
+		mapxy(&oppgoalbottom, &nearpoint, &globaldata);
+		FARPOS = nearpoint.x;
+		float Balldx=globaldata.ballvelS.x;
+		float Balldy=globaldata.ballvelS.y;
+
+
+		BallPos = globaldata.GballposS;
+		Ballspeed = (float)sqrt(Balldx*Balldx + Balldy*Balldy);
+
+
+		GAngle = globaldata.goalieangleS;
+
+	}
+	~CStrikerAction(){}
+
+//  Switching Conditions/ State Transitions
+//  Possible state transitions
+//	S0S1, S0S2, S0S3
+//	S1S2, S1S3
+//	S2S3, S2S1,
+//	S3S2, S3S1
+
+
+	BOOL S0S1()
+	{
+
+			return true;
+	}
+
+	BOOL S0S2()
+	{
+
+			return false;
+	}
+
+	BOOL S0S3()
+	{
+
+			return false;
+	}
+
+	BOOL S1S2()
+	{
+
+			return S0S2();
+	}
+	BOOL S1S3()
+	{
+
+			return S0S3();
+	}
+
+	BOOL S2S1()
+	{
+
+			return S0S1();
+	}
+
+	BOOL S2S3()
+	{
+
+			return S0S3();
+	}
+
+	BOOL S3S2()
+	{
+
+			return S0S2();
+	}
+	BOOL S3S1()
+	{
+
+			return S0S1();
+	}
+
+	// Action States
+	// S0 initialisation
+	//void S0() {}; // No Action for Initialisation State
+
+	void S1() //-- get ball 
+	{
+		floatPOINT goalTarget;
+		goalTarget.x = FARPOS;
+		goalTarget.y = Physical_Yby2;
+
+
+		myShoot(which, &goalTarget);
+	}
+
+	void S2()	//-- tackle
+	{	
+		
+	}
+
+	void S3()//----	Defend
+	{
+
+	}
+
+	//-- Run function
+	void runAction()
+	{
+		switch(*pstate)
+		{
+		case 0://-- S0 (initialisation)
+			if( S0S1() ) { S1(); *pstate = 1;}		//-- move to state S1
+			else if( S0S2() ) { S2(); *pstate = 2;}	//-- move to state S2
+			else if( S0S3() ) { S3(); *pstate = 3;}	//-- move to state S3
+			else 
+			{
+			// Give error alert message;
+				MessageBox( NULL, TEXT("State transtition error"), TEXT("Error"), MB_OK );
+			}
+			break;
+
+		case 1://-- S1
+			if( S1S2() ) {S2(); *pstate = 2;}		//-- move to state S2
+			else if( S1S3() ) { S3(); *pstate = 3;}	//-- move to state S3
+			else S1();					//-- continue to stay in state S1
+			break;
+
+		case 2://-- S2
+			if( S2S3() ) { S3(); *pstate = 3;}		//-- move to state S3
+			else if( S2S1() ) {S1();  *pstate = 1;}	//-- move to state S1
+			else S2();					//-- continue to stay in state S2
+			break;
+
+		case 3://-- S3
+			if( S3S2() ) {S2(); *pstate = 2;}		//-- move to state S2
+			else if( S3S1() ) {S1();  *pstate = 1;}	//-- move to state S1
+			else S3();					//-- continue to stay in state S3
+			break;
+
+		default: // Give error alert message
+			MessageBox( NULL, TEXT("State transtition error"), TEXT("Error"), MB_OK );
+			break;
+		}
+		return;
+	}
+
+};	//-- CStrikerAction class definition ends here
+
+
+class CDefenderAction //----- To defend the goal from attack by opponent
+{
+
+private:
+	float MIDDLE;
+	float NEARPOS;
+	float XHYSTERESIS;
+	float YHYSTERESIS;
+	float HALF_GOALSIZE;
+	float CLEARYOFFSET;
+	int *pstate;
+	int which; //---- which robot we're referring to
+	floatPOINT BallPos;
+	float Ballspeed;
+	floatPOINT finalPos;
+	floatPOINT GPos;
+	float GAngle;
+	float GOALIESTANDX;
+
+
+	
+public:
+	CDefenderAction(int w, int *ps)
+	{ 
+		floatPOINT nearpoint;
+		floatPOINT homegoalbottom;
+		pstate = ps ;  
+		which = w;
+		MIDDLE = Physical_Xby2;
+		homegoalbottom.x = (float)globaldata.homegoalbottom.x;
+		homegoalbottom.y = (float)globaldata.homegoalbottom.y;
+		mapxy(&homegoalbottom,&nearpoint,&globaldata);
+		XHYSTERESIS = 3.0;
+		YHYSTERESIS = 2.0;
+		NEARPOS = nearpoint.x + XHYSTERESIS;
+		float Balldx=globaldata.ballvelS.x;
+		float Balldy=globaldata.ballvelS.y;
+
+
+		BallPos = globaldata.GballposS;
+		Ballspeed = (float)sqrt(Balldx*Balldx + Balldy*Balldy);
+
+
+		GAngle = globaldata.goalieangleS;
+
+	}
+	~CDefenderAction(){}
+
+//  Switching Conditions/ State Transitions
+//  Possible state transitions
+//	S0S1, S0S2, S0S3, S0S4
+//	S1S2, S1S3, S1S4
+//	S2S3, S2S1, S2S4
+//	S3S2, S3S1, S3S4
+
+
+	BOOL S0S1()
+	{
+
+			return true;
+	}
+
+	BOOL S0S2()
+	{
+
+			return false;
+	}
+
+	BOOL S0S3()
+	{
+
+			return false;
+	}
+	BOOL S0S4()
+	{
+
+			return false;
+	}
+
+	BOOL S1S2()
+	{
+
+			return S0S2();
+	}
+	BOOL S1S3()
+	{
+
+			return S0S3();
+	}
+	BOOL S1S4()
+	{
+
+			return S0S4();
+	}
+
+	BOOL S2S1()
+	{
+
+			return S0S1();
+	}
+
+	BOOL S2S3()
+	{
+
+			return S0S3();
+	}
+	BOOL S2S4()
+	{
+
+			return S0S4();
+	}
+
+	BOOL S3S1()
+	{
+
+			return S0S1();
+	}
+	BOOL S3S2()
+	{
+
+			return S0S2();
+	}
+	
+	BOOL S3S4()
+	{
+
+			return S0S4();
+	}
+	BOOL S4S1()
+	{
+
+			return S0S1();
+	}
+	BOOL S4S2()
+	{
+
+			return S0S2();
+	}
+
+	BOOL S4S3()
+	{
+
+			return S0S3();
+	}
+
+	// Action States
+	// S0 initialisation
+	//void S0() {}; // No Action for Initialisation State
+
+	void S1() //-- Track like goalie
+	{
+		
+	}
+
+	void S2()	//-- tackle
+	{	
+		
+	}
+
+	void S3()//----	Clear
+	{
+
+	}
+	void S4()//----	Assist
+	{
+
+	}
+
+	//-- Run function
+	void runAction()
+	{
+		switch(*pstate)
+		{
+		case 0://-- S0 (initialisation)
+			if( S0S1() ) { S1(); *pstate = 1;}		//-- move to state S1
+			else if( S0S2() ) { S2(); *pstate = 2;}	//-- move to state S2
+			else if( S0S3() ) { S3(); *pstate = 3;}	//-- move to state S3
+			else if( S0S4() ) { S4(); *pstate = 4;}	//-- move to state S4
+			else 
+			{
+			// Give error alert message;
+				MessageBox( NULL, TEXT("State transtition error"), TEXT("Error"), MB_OK );
+			}
+			break;
+
+		case 1://-- S1
+			if( S1S2() ) {S2(); *pstate = 2;}		//-- move to state S2
+			else if( S1S3() ) { S3(); *pstate = 3;}	//-- move to state S3
+			else if( S1S4() ) { S4(); *pstate = 4;}	//-- move to state S4
+			else S1();					//-- continue to stay in state S1
+			break;
+
+		case 2://-- S2
+			if( S2S3() ) { S3(); *pstate = 3;}		//-- move to state S3
+			else if( S2S1() ) {S1();  *pstate = 1;}	//-- move to state S1
+			else if( S2S4() ) { S4(); *pstate = 4;}	//-- move to state S4
+			else S2();					//-- continue to stay in state S2
+			break;
+
+		case 3://-- S3
+			if( S3S2() ) {S2(); *pstate = 2;}		//-- move to state S2
+			else if( S3S1() ) {S1();  *pstate = 1;}	//-- move to state S1
+			else if( S3S4() ) { S4(); *pstate = 4;}	//-- move to state S4
+			else S3();					//-- continue to stay in state S3
+			break;
+		case 4://-- S4
+			if( S4S1() ) {S1(); *pstate = 1;}		//-- move to state S1
+			else if( S4S2() ) { S2(); *pstate = 2;}	//-- move to state S2
+			else if( S4S3() ) { S3(); *pstate = 3;}	//-- move to state S3
+			else S4();					//-- continue to stay in state S4
+			break;
+
+		default: // Give error alert message
+			MessageBox( NULL, TEXT("State transtition error"), TEXT("Error"), MB_OK );
+			break;
+		}
+		return;
+	}
+
+};	//-- CDefenderAction class definition ends here
+
 void placeRobots()
 {
 	//---- Desired Robot Positions
@@ -726,6 +1128,101 @@ void placeRobots()
 }	//-- placeRobots()
 
 
+void myShoot(int which, floatPOINT *targetPos)
+{
+	floatPOINT target = *targetPos;
+	
+	float maxAngleError = 80;
+	
+	int d= 0; 
+	float robotAngle, dx, dy, dx1, dy1, angle1, angle2, angle3, angleError, Vl, Vr;
+	floatPOINT robotVel, robotPos, ballPos;
+
+	float Ka = 0.4; //MIGHT NEED ADJUSTING
+	float speed = 20;//MIGHT NEED ADJUSTING
+
+	ballPos = globaldata.ballposS;
+	
+	switch(which)
+	{
+	case HGOALIE:
+			robotAngle = globaldata.goalieangleS;
+			robotPos = globaldata.goalieposS;
+			//robotVel = globaldata.goalievelS;
+			break;
+	case HROBOT1:
+			robotAngle = globaldata.robot1angleS;
+			robotPos = globaldata.robot1posS;
+			//robotVel = globaldata.robot1velS;
+			break;
+	case HROBOT2:	
+			robotAngle = globaldata.robot2angleS;
+			robotPos = globaldata.robot2posS;
+			//robotVel = globaldata.robot2velS;
+			break;
+	}	//-- end of switch
+	
+	dx = fabs(target.x - ballPos.x);
+	dy =  ballPos.y - target.y; //??
+
+	dx1 = fabs(ballPos.x - robotPos.x);
+	dy1 = ballPos.y - robotPos.y; //??
+
+	angle1 = atan2(dy1,dx1)*(180/PI);
+	angle2 = atan2(dy,dx)*(180/PI);
+
+	angle3 = 2*angle2 - angle1;
+	
+	if (angle3 > 180)		//-- normalisation for -180 to +180
+		angle3 -= 360;
+	else if (angle3 < -180)
+		angle3 += 360;
+
+	angleError = angle3 - robotAngle;
+
+	if (angleError > 180)		//-- normalisation for -180 to +180
+		angleError -= 360;
+	else if (angleError < -180)
+		angleError += 360;
+
+	if (-maxAngleError < angleError && angleError < maxAngleError)
+		d = 1;
+	else
+		if ((180 >= angleError && angleError > 180-maxAngleError) ||
+		(-180 < angleError && angleError <= -180+maxAngleError) )
+		{
+			if (angleError < -90) //-- switch robot's front direction
+			{
+				angleError += 180;
+				d = -1;
+			}
+			else
+			if (angleError > 90)
+			{
+				angleError -= 180;
+				d = -1;
+			}
+		}
+		else
+			d = 0;
+
+
+if(d==0)
+	angle(which, angle3);
+else{
+
+	Vl = d*speed - Ka*angleError;
+	Vr = d*speed + Ka*angleError;
+
+	velocity(which, Vl, Vr);
+}
+
+
+
+
+}
+
+
 ////////////////////////////////////////////////////
 void myStrategy()
 {
@@ -751,6 +1248,11 @@ void myStrategy()
 	float finalVel;
 	float desiredAngle;
 	int which;
+
+	floatPOINT nearpoint;
+	floatPOINT movePos;
+	floatPOINT oppgoalbottom;
+	float FARPOS;
 
 	switch (gChoice)
 	{
@@ -798,7 +1300,27 @@ void myStrategy()
 	//--------------------------------------------------------
 	break;
 
-	case 3 :	break;
+	case 3 :	//Test myShoot()
+
+		oppgoalbottom.x = (float)globaldata.oppgoalbottom.x;
+		oppgoalbottom.y = (float)globaldata.oppgoalbottom.y;
+		mapxy(&oppgoalbottom, &nearpoint, &globaldata);
+		FARPOS = nearpoint.x;
+
+		//	which = HGOALIE;	//-- goalie
+		//	which = HROBOT1;	//-- defender
+		which = HROBOT2;	//-- striker
+
+		finalPos.x = FARPOS;
+		finalPos.y = Physical_Yby2;
+
+		myShoot(which, &finalPos);
+		//position(which, finalPos, 0, 0);
+
+		//avoidBound(which, finalPos);
+		//avoidGoalAreas(which, finalPos);
+		
+		break;
 
 	case 4 :	break;
 
@@ -819,6 +1341,16 @@ void myStrategy()
 
 	case 10://---- Kick Start + Normal game
 			//-- insert code here to play the game
+		{
+		CGoalieAction Goalie(HGOALIE, &(globaldata.GState));
+		Goalie.runAction();
+
+		CDefenderAction Defender(HROBOT1, &(globaldata.R1State));
+		Defender.runAction();
+
+		CStrikerAction Striker(HROBOT2, &(globaldata.R2State));
+		Striker.runAction();
+		}
 
 		break;
 
