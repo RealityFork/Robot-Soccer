@@ -4,6 +4,11 @@
 #define COMMONDATA_INCLUDED_
 
 #include "fbus.h"
+#include "afxwin.h"
+//#include "BehaviourGoalie.h"
+//#include "BehaviourRobot.h"
+class CGoalieAction;
+class RobotBehaviour;
 
 enum play_area {LEFT_AREA, RIGHT_AREA};
 enum Diagnostic_Level {OFF, LOW, HIGH};
@@ -17,7 +22,7 @@ enum whichQuadrant {TOPLEFT, TOPRIGHT, BOTTOMLEFT, BOTTOMRIGHT};
 enum FieldType {ODD,EVEN};
 //-- 20 x 20 window around the capture point will be zoomed
 #define CAPSIZE	10
-#define MAXROBOTS	3
+#define MAXROBOTS 3
 	//-- maximum number of robots in the game
 
 #define MAXSTRING 40
@@ -219,10 +224,13 @@ struct commondata
 	// Hamish
 	
 #define ballVelNSamples 10
-
 	floatPOINT ballVelSamples[ballVelNSamples];
 	int ballVelIndex;
 
+	// These are used to maintain the same instances
+	/*CGoalieAction  *gBehaviour;
+	RobotBehaviour *r1Behaviour;
+	RobotBehaviour *r2Behaviour;*/
 
 };	//-- end of structure commondata
 

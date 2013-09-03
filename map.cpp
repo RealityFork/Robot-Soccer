@@ -1,11 +1,7 @@
 //-- Filename : map.cpp
 //-- Mapping functions to convert screen coordinates to physical coordinates.
-
 #include "stdafx.h"
-#include "commondata.h"
 #include "map.h"
-#include "vision.h"
-#include "math.h"
 
 //-- Standard Mapping Functions
 

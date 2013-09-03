@@ -6,17 +6,43 @@
 --------------------Configuration: myrosot1 - Win32 Release--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\DOCUME~1\hjfagg\LOCALS~1\Temp\RSPBE.tmp" with contents
+Creating command line "rc.exe /l 0x409 /fo"Release/myrosot1.res" /d "NDEBUG" /d "_AFXDLL" "G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\myrosot1.rc"" 
+Creating temporary file "C:\Users\MystX\AppData\Local\Temp\RSP7936.tmp" with contents
 [
 /nologo /G5 /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /FR"Release/" /Fp"Release/myrosot1.pch" /Yu"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
-"G:\Robot-Soccer\myStrategy.cpp"
+"G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\AdjColDlg.cpp"
+"G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\controlalgo.cpp"
+"G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\GrabberSettingsDlg.cpp"
+"G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\map.cpp"
+"G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\myrosot1.cpp"
+"G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\myrosot1Dlg.cpp"
+"G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\myStrategy.cpp"
+"G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\Parameters.cpp"
+"G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\RFComm.cpp"
+"G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\RFCommDlg.cpp"
+"G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\TestingDlg2.cpp"
+"G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\TuningDlg.cpp"
 ]
-Creating command line "cl.exe @C:\DOCUME~1\hjfagg\LOCALS~1\Temp\RSPBE.tmp" 
-Creating temporary file "C:\DOCUME~1\hjfagg\LOCALS~1\Temp\RSPBF.tmp" with contents
+Creating command line "cl.exe @C:\Users\MystX\AppData\Local\Temp\RSP7936.tmp" 
+Creating temporary file "C:\Users\MystX\AppData\Local\Temp\RSP7937.tmp" with contents
+[
+/nologo /G5 /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /FR"Release/" /Fo"Release/" /Fd"Release/" /FD /c 
+"G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\AdjGameArea.cpp"
+"G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\BehaviourGoalie.cpp"
+]
+Creating command line "cl.exe @C:\Users\MystX\AppData\Local\Temp\RSP7937.tmp" 
+Creating temporary file "C:\Users\MystX\AppData\Local\Temp\RSP7938.tmp" with contents
+[
+/nologo /G5 /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /FR"Release/" /Fp"Release/myrosot1.pch" /Yc"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
+"G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\Users\MystX\AppData\Local\Temp\RSP7938.tmp" 
+Creating temporary file "C:\Users\MystX\AppData\Local\Temp\RSP7948.tmp" with contents
 [
 winmm.lib user32.lib fbus32.lib /nologo /subsystem:windows /incremental:yes /pdb:"Release/myrosot1.pdb" /machine:I386 /out:"Release/myrosot1.exe" 
 ".\Release\AdjColDlg.obj"
 ".\Release\AdjGameArea.obj"
+".\Release\BehaviourGoalie.obj"
 ".\Release\controlalgo.obj"
 ".\Release\GrabberSettingsDlg.obj"
 ".\Release\map.obj"
@@ -32,23 +58,67 @@ winmm.lib user32.lib fbus32.lib /nologo /subsystem:windows /incremental:yes /pdb
 ".\vision.obj"
 ".\Release\myrosot1.res"
 ]
-Creating command line "link.exe @C:\DOCUME~1\hjfagg\LOCALS~1\Temp\RSPBF.tmp"
+Creating command line "link.exe @C:\Users\MystX\AppData\Local\Temp\RSP7948.tmp"
 <h3>Output Window</h3>
+Compiling resources...
 Compiling...
+StdAfx.cpp
+Compiling...
+AdjColDlg.cpp
+C:\Microsoft Visual C++ 6.0 Standard Edition\VC98\INCLUDE\math.h(426) : warning C4091: 'extern __declspec(dllimport ) ' : ignored on left of 'double' when no variable is declared
+controlalgo.cpp
+C:\Microsoft Visual C++ 6.0 Standard Edition\VC98\INCLUDE\math.h(426) : warning C4091: 'extern __declspec(dllimport ) ' : ignored on left of 'double' when no variable is declared
+G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\controlalgo.cpp(284) : warning C4305: 'initializing' : truncation from 'const double' to 'float'
+G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\controlalgo.cpp(379) : warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\controlalgo.cpp(380) : warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+GrabberSettingsDlg.cpp
+C:\Microsoft Visual C++ 6.0 Standard Edition\VC98\INCLUDE\math.h(426) : warning C4091: 'extern __declspec(dllimport ) ' : ignored on left of 'double' when no variable is declared
+map.cpp
+myrosot1.cpp
+C:\Microsoft Visual C++ 6.0 Standard Edition\VC98\INCLUDE\math.h(426) : warning C4091: 'extern __declspec(dllimport ) ' : ignored on left of 'double' when no variable is declared
+myrosot1Dlg.cpp
+C:\Microsoft Visual C++ 6.0 Standard Edition\VC98\INCLUDE\math.h(426) : warning C4091: 'extern __declspec(dllimport ) ' : ignored on left of 'double' when no variable is declared
 myStrategy.cpp
-C:\Program Files\Microsoft Visual Studio\VC98\INCLUDE\math.h(426) : warning C4091: 'extern __declspec(dllimport ) ' : ignored on left of 'double' when no variable is declared
-G:\Robot-Soccer\myStrategy.cpp(437) : warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-G:\Robot-Soccer\myStrategy.cpp(477) : warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-G:\Robot-Soccer\myStrategy.cpp(489) : warning C4305: '=' : truncation from 'const double' to 'float'
-G:\Robot-Soccer\myStrategy.cpp(536) : warning C4305: '=' : truncation from 'const double' to 'float'
-G:\Robot-Soccer\myStrategy.cpp(538) : warning C4305: '=' : truncation from 'const double' to 'float'
+C:\Microsoft Visual C++ 6.0 Standard Edition\VC98\INCLUDE\math.h(426) : warning C4091: 'extern __declspec(dllimport ) ' : ignored on left of 'double' when no variable is declared
+G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\myStrategy.cpp(833) : warning C4305: 'initializing' : truncation from 'const double' to 'float'
+G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\myStrategy.cpp(857) : warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\myStrategy.cpp(860) : warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\myStrategy.cpp(863) : warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\myStrategy.cpp(864) : warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\myStrategy.cpp(909) : warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\myStrategy.cpp(909) : warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\myStrategy.cpp(831) : warning C4101: 'robotVel' : unreferenced local variable
+G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\myStrategy.cpp(945) : warning C4101: 'movePos' : unreferenced local variable
+Parameters.cpp
+C:\Microsoft Visual C++ 6.0 Standard Edition\VC98\INCLUDE\math.h(426) : warning C4091: 'extern __declspec(dllimport ) ' : ignored on left of 'double' when no variable is declared
+RFComm.cpp
+C:\Microsoft Visual C++ 6.0 Standard Edition\VC98\INCLUDE\math.h(426) : warning C4091: 'extern __declspec(dllimport ) ' : ignored on left of 'double' when no variable is declared
+RFCommDlg.cpp
+C:\Microsoft Visual C++ 6.0 Standard Edition\VC98\INCLUDE\math.h(426) : warning C4091: 'extern __declspec(dllimport ) ' : ignored on left of 'double' when no variable is declared
+TestingDlg2.cpp
+C:\Microsoft Visual C++ 6.0 Standard Edition\VC98\INCLUDE\math.h(426) : warning C4091: 'extern __declspec(dllimport ) ' : ignored on left of 'double' when no variable is declared
+TuningDlg.cpp
+C:\Microsoft Visual C++ 6.0 Standard Edition\VC98\INCLUDE\math.h(426) : warning C4091: 'extern __declspec(dllimport ) ' : ignored on left of 'double' when no variable is declared
+Generating Code...
+Compiling...
+AdjGameArea.cpp
+C:\Microsoft Visual C++ 6.0 Standard Edition\VC98\INCLUDE\math.h(426) : warning C4091: 'extern __declspec(dllimport ) ' : ignored on left of 'double' when no variable is declared
+BehaviourGoalie.cpp
+C:\Microsoft Visual C++ 6.0 Standard Edition\VC98\INCLUDE\math.h(426) : warning C4091: 'extern __declspec(dllimport ) ' : ignored on left of 'double' when no variable is declared
+G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\BehaviourGoalie.cpp(137) : warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\BehaviourGoalie.cpp(166) : warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\BehaviourGoalie.cpp(172) : warning C4305: '=' : truncation from 'const double' to 'float'
+G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\BehaviourGoalie.cpp(190) : warning C4305: '=' : truncation from 'const double' to 'float'
+G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\BehaviourGoalie.cpp(192) : warning C4305: '=' : truncation from 'const double' to 'float'
+Generating Code...
 Linking...
-Creating temporary file "C:\DOCUME~1\hjfagg\LOCALS~1\Temp\RSPC0.tmp" with contents
+Creating temporary file "C:\Users\MystX\AppData\Local\Temp\RSPA91F.tmp" with contents
 [
 /nologo /o"Release/myrosot1.bsc" 
 ".\Release\StdAfx.sbr"
 ".\Release\AdjColDlg.sbr"
 ".\Release\AdjGameArea.sbr"
+".\Release\BehaviourGoalie.sbr"
 ".\Release\controlalgo.sbr"
 ".\Release\GrabberSettingsDlg.sbr"
 ".\Release\map.sbr"
@@ -60,14 +130,14 @@ Creating temporary file "C:\DOCUME~1\hjfagg\LOCALS~1\Temp\RSPC0.tmp" with conten
 ".\Release\RFCommDlg.sbr"
 ".\Release\TestingDlg2.sbr"
 ".\Release\TuningDlg.sbr"]
-Creating command line "bscmake.exe @C:\DOCUME~1\hjfagg\LOCALS~1\Temp\RSPC0.tmp"
+Creating command line "bscmake.exe @C:\Users\MystX\AppData\Local\Temp\RSPA91F.tmp"
 Creating browse info file...
 <h3>Output Window</h3>
 
 
 
 <h3>Results</h3>
-myrosot1.exe - 0 error(s), 6 warning(s)
+myrosot1.exe - 0 error(s), 30 warning(s)
 </pre>
 </body>
 </html>

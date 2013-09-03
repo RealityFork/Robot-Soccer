@@ -1,13 +1,6 @@
 // myrosot1Dlg.h : header file
 //
 
-#include "AdjColDlg.h"
-#include "RFCommDlg.h"
-#include "Parameters.h"
-#include "commondata.h"
-#include "AdjGameArea.h"
-#include "GrabberSettingsDlg.h"
-#include "TuningDlg.h"
 
 #if !defined(AFX_MYROSOT1DLG_H__F3F95E86_E074_11D2_8B75_817FE7DC6734__INCLUDED_)
 #define AFX_MYROSOT1DLG_H__F3F95E86_E074_11D2_8B75_817FE7DC6734__INCLUDED_
@@ -16,6 +9,33 @@
 #pragma once
 #endif // _MSC_VER >= 1000
 
+//#include "AdjColDlg.h"
+//#include "RFCommDlg.h"
+//#include "Parameters.h"
+#include "commondata.h"
+//#include "AdjGameArea.h"
+//#include "GrabberSettingsDlg.h"
+//#include "TuningDlg.h"
+#include "stdafx.h"
+#include "myrosot1.h"
+#include "mmsystem.h"
+#include "math.h"
+#include "stdio.h"
+#include "winuser.h"
+#include "map.h"
+#include "vision.h"
+#include "RFComm.h"
+#include "myStrategy.h"
+#include "fbus.h"
+#include "testingDlg2.h"
+#include "controlalgo.h"
+
+class CAdjColDlg;
+class CGrabberSettingsDlg;
+class CAdjGameArea;
+class CRFCommDlg;
+class CParameters;
+class CTuningDlg;
 
 //UINT gameThread(LPVOID pParam);
 //UINT txThread(LPVOID pParam);
@@ -44,12 +64,12 @@ public:
 
 	CMyrosot1Dlg(CWnd* pParent = NULL);	// standard constructor
 
-	CAdjColDlg m_AdjColDlg;		//-- Adjust Colour Dialog Box
-	CRFCommDlg m_RFCommDlg;		//-- RF Communication Dialog Box
-	CParameters m_ParametersDlg;//-- Parameters Dialog Box
-	CAdjGameArea m_AdjGameAreaDlg;	//-- Adjust Game Area Dialog Box
-	CGrabberSettingsDlg m_GrabberSettingsDlg;//-- Grabber settings dialog Box
-	CTuningDlg m_TuningDlg;	//-- Dialog Box for tuning
+	CAdjColDlg *m_AdjColDlg;		//-- Adjust Colour Dialog Box
+	CRFCommDlg *m_RFCommDlg;		//-- RF Communication Dialog Box
+	CParameters *m_ParametersDlg;//-- Parameters Dialog Box
+	CAdjGameArea *m_AdjGameAreaDlg;	//-- Adjust Game Area Dialog Box
+	CGrabberSettingsDlg *m_GrabberSettingsDlg;//-- Grabber settings dialog Box
+	CTuningDlg *m_TuningDlg;	//-- Dialog Box for tuning
 
 // Dialog Data
 	//{{AFX_DATA(CMyrosot1Dlg)

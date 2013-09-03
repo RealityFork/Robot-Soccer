@@ -8,6 +8,8 @@
 #include "commondata.h"
 #include "math.h"
 #include "vision.h"
+#include "map.h"
+#include "myStrategy.h"
 
 #define HGOALIE	0
 #define HROBOT1	1

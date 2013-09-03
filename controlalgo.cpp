@@ -1,12 +1,9 @@
 //-- Filename : controlalgo.cpp
 //-- Implements control algorithms
 
-#include "stdAfx.h"
-#include "commondata.h"
-#include "math.h"
+#include "stdafx.h"
 #include "controlalgo.h"
-#include "map.h"
-#include "myStrategy.h"
+
 
 
 void angle(int which, float desiredAngle)

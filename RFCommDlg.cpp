@@ -2,13 +2,7 @@
 //
 
 #include "stdafx.h"
-#include "myrosot1.h"
 #include "RFCommDlg.h"
-#include "vision.h"
-#include "mmsystem.h"
-
-#include "commondata.h"
-#include "RFComm.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

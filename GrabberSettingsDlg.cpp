@@ -2,10 +2,8 @@
 //
 
 #include "stdafx.h"
-#include "myrosot1.h"
 #include "GrabberSettingsDlg.h"
-#include "vision.h"
-#include "fbus.h"
+
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

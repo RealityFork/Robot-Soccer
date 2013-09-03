@@ -6,6 +6,9 @@
 #include "commondata.h"
 #include "math.h"
 
+struct floatPOINT;
+struct commondata;
+
 #define TEAM	0
 #define BALL	1
 #define OPPO	2

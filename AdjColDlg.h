@@ -1,6 +1,9 @@
 #if !defined(AFX_ADJCOLDLG_H__C09B7AE2_2305_11D3_ADD5_003506C10700__INCLUDED_)
 #define AFX_ADJCOLDLG_H__C09B7AE2_2305_11D3_ADD5_003506C10700__INCLUDED_
 
+#include "commondata.h"
+#include "myrosot1.h"
+//class CMyrosot1Dlg;
 #if _MSC_VER >= 1000
 #pragma once
 #endif // _MSC_VER >= 1000

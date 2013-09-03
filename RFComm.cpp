@@ -1,12 +1,8 @@
 //-- Filename : RFComm.cpp
 //-- Contains the implementation of routines required for
 //-- RF Communication
-
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "RFComm.h"
-#include "commondata.h"
-#include "mmsystem.h"
-#include "vision.h"
 
 DCB dcb = {0};
 

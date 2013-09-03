@@ -4,6 +4,12 @@
 #if !defined (RFCOMM_INCLUDED_)
 #define RFCOMM_INCLUDED_
 
+#include "StdAfx.h"
+#include "commondata.h"
+#include "mmsystem.h"
+#include "vision.h"
+
+
 enum comports {COM1, COM2};
 
 //-- robot IDs and Header

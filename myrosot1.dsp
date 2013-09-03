@@ -95,18 +95,67 @@ LINK32=link.exe
 # Begin Source File
 
 SOURCE=.\AdjColDlg.cpp
+
+!IF  "$(CFG)" == "myrosot1 - Win32 Release"
+
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "myrosot1 - Win32 Debug"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
 SOURCE=.\AdjGameArea.cpp
+
+!IF  "$(CFG)" == "myrosot1 - Win32 Release"
+
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "myrosot1 - Win32 Debug"
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\BehaviourGoalie.cpp
+
+!IF  "$(CFG)" == "myrosot1 - Win32 Release"
+
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "myrosot1 - Win32 Debug"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
 SOURCE=.\controlalgo.cpp
+
+!IF  "$(CFG)" == "myrosot1 - Win32 Release"
+
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "myrosot1 - Win32 Debug"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
 SOURCE=.\GrabberSettingsDlg.cpp
+
+!IF  "$(CFG)" == "myrosot1 - Win32 Release"
+
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "myrosot1 - Win32 Debug"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
@@ -173,6 +222,14 @@ SOURCE=.\AdjColDlg.h
 # Begin Source File
 
 SOURCE=.\AdjGameArea.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\BehaviourGoalie.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\BehaviourRobot.h
 # End Source File
 # Begin Source File
 

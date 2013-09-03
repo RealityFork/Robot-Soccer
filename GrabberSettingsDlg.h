@@ -7,6 +7,11 @@
 // GrabberSettingsDlg.h : header file
 //
 
+#include "stdafx.h"
+#include "myrosot1.h"
+#include "vision.h"
+#include "fbus.h"
+
 /////////////////////////////////////////////////////////////////////////////
 // CGrabberSettingsDlg dialog
 

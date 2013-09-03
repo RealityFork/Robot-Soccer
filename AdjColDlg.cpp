@@ -1,11 +1,8 @@
 // AdjColDlg.cpp : implementation file
 //
-
 #include "stdafx.h"
-#include "myrosot1.h"
 #include "AdjColDlg.h"
 
-#include "commondata.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

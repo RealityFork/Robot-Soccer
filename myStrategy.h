@@ -4,6 +4,14 @@
 #define MYSTRATEGY_INCLUDED_
 
 #include "commondata.h"
+#include "StdAfx.h"
+#include "controlalgo.h"
+#include "commondata.h"
+#include "RFComm.h"
+#include "map.h"
+#include "math.h"
+#include "BehaviourGoalie.h"
+#include "BehaviourRobot.h"
 
 #define ROBOTWIDTH	7.6
 //--- width of the colour jacket on the robot

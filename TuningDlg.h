@@ -7,6 +7,10 @@
 // TuningDlg.h : header file
 //
 
+#include "stdafx.h"
+#include "myrosot1.h"
+#include "commondata.h"
+
 /////////////////////////////////////////////////////////////////////////////
 // CTuningDlg dialog
 

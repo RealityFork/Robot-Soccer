@@ -13,7 +13,8 @@
 #endif
 
 #include "resource.h"		// main symbols
-
+#include "myrosot1Dlg.h"
+#include "stdafx.h"
 /////////////////////////////////////////////////////////////////////////////
 // CMyrosot1App:
 // See myrosot1.cpp for the implementation of this class

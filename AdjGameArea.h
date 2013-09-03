@@ -7,6 +7,11 @@
 // AdjGameArea.h : header file
 //
 
+#include "stdafx.h"
+#include "myrosot1.h"
+#include "commondata.h"
+#include "vision.h"
+
 /////////////////////////////////////////////////////////////////////////////
 // CAdjGameArea dialog
 

@@ -3,6 +3,9 @@
 
 #include "Fbus.h"	// Added by ClassView
 #include "commondata.h"
+#include "stdafx.h"
+#include "myrosot1.h"
+
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000

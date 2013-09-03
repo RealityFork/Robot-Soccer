@@ -4,6 +4,10 @@
 #if !defined MAP_INCLUDED_
 #define MAP_INCLUDED_
 
+#include "math.h"
+#include "commondata.h"
+#include "vision.h"
+
 //-- the physical size of the field is 150cm X 130cm
 #define Physical_X	(float)150.0
 #define Physical_Y	(float)130.0

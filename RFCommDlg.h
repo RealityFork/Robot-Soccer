@@ -7,6 +7,13 @@
 // RFCommDlg.h : header file
 //
 
+#include "vision.h"
+#include "stdafx.h"
+#include "myrosot1.h"
+#include "mmsystem.h"
+#include "commondata.h"
+#include "RFComm.h"
+
 /////////////////////////////////////////////////////////////////////////////
 // CRFCommDlg dialog
 

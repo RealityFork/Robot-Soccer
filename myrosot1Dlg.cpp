@@ -1,22 +1,13 @@
 // myrosot1Dlg.cpp : implementation file
 //
-
 #include "stdafx.h"
-#include "myrosot1.h"
 #include "myrosot1Dlg.h"
-#include "mmsystem.h"
-#include "math.h"
-#include "stdio.h"
-#include "winuser.h"
-
-#include "map.h"
-#include "commondata.h"
-#include "vision.h"
-#include "RFComm.h"
-#include "myStrategy.h"
-#include "fbus.h"
-#include "testingDlg2.h"
-#include "controlalgo.h"
+#include "AdjColDlg.h"
+#include "AdjGameArea.h"
+#include "GrabberSettingsDlg.h"
+#include "TuningDlg.h"
+#include "RFCommDlg.h"
+#include "Parameters.h"
 
 
 #ifdef _DEBUG
@@ -406,9 +397,9 @@ BOOL CMyrosot1Dlg::OnInitDialog()
 
 	gBallClearTime = (float)0.1;	//-- goalie will clear the ball in 0.1 sec
 
-	m_ParametersDlg.m_GoalieRemoved = gRemoved.Goalie;
-	m_ParametersDlg.m_Robot1Removed = gRemoved.Robot1;
-	m_ParametersDlg.m_Robot2Removed = gRemoved.Robot2;
+	m_ParametersDlg->m_GoalieRemoved = gRemoved.Goalie;
+	m_ParametersDlg->m_Robot1Removed = gRemoved.Robot1;
+	m_ParametersDlg->m_Robot2Removed = gRemoved.Robot2;
 
 	//-- make pdata point to the global variable which stores all common data
 	pdata = &globaldata;
@@ -880,17 +871,17 @@ void CMyrosot1Dlg::OnFileExit()
 
 void CMyrosot1Dlg::OnUtilsRfcomm() 
 {
-	m_RFCommDlg.DoModal();
+	m_RFCommDlg->DoModal();
 }
 
 void CMyrosot1Dlg::OnUtilsSetparameters() 
 {
-	m_ParametersDlg.DoModal();	
+	m_ParametersDlg->DoModal();	
 }
 
 void CMyrosot1Dlg::OnUtilsTuning() 
 {
-	m_TuningDlg.DoModal();
+	m_TuningDlg->DoModal();
 }
 
 void CMyrosot1Dlg::OnUtilsTesting() 
@@ -898,9 +889,9 @@ void CMyrosot1Dlg::OnUtilsTesting()
 	CTestingDlg temp;
 	temp.DoModal();
 
-	m_ParametersDlg.m_GoalieRemoved = gRemoved.Goalie;
-	m_ParametersDlg.m_Robot1Removed = gRemoved.Robot1;
-	m_ParametersDlg.m_Robot2Removed = gRemoved.Robot2;
+	m_ParametersDlg->m_GoalieRemoved = gRemoved.Goalie;
+	m_ParametersDlg->m_Robot1Removed = gRemoved.Robot1;
+	m_ParametersDlg->m_Robot2Removed = gRemoved.Robot2;
 }
 
 void CMyrosot1Dlg::OnUtilsAdjustgamearea() 
@@ -911,7 +902,7 @@ void CMyrosot1Dlg::OnUtilsAdjustgamearea()
 	pdata->timer2_installed = TRUE;
 
 	//-- create the Adjust Game Area Dialog Box
-	m_AdjGameAreaDlg.DoModal();
+	m_AdjGameAreaDlg->DoModal();
 
 	m_SetBoundary = pdata->SetBoundary;
 	UpdateData(FALSE);
@@ -1909,9 +1900,9 @@ void CMyrosot1Dlg::OnGetreadyButton()
 
 			gNotFoundCount.Goalie = gNotFoundCount.Robot1
 									= gNotFoundCount.Robot2 = 0;
-			gRemoved.Goalie = m_ParametersDlg.m_GoalieRemoved;
-			gRemoved.Robot1 = m_ParametersDlg.m_Robot1Removed;
-			gRemoved.Robot2 = m_ParametersDlg.m_Robot2Removed;
+			gRemoved.Goalie = m_ParametersDlg->m_GoalieRemoved;
+			gRemoved.Robot1 = m_ParametersDlg->m_Robot1Removed;
+			gRemoved.Robot2 = m_ParametersDlg->m_Robot2Removed;
 			
 			//-- Initialise the action states
 			pdata->GState = 0;
@@ -2823,7 +2814,7 @@ void CMyrosot1Dlg::OnAdjustrangeButton()
 	m_Bkcolour = pdata->Bkcolour = false;
 	UpdateData(FALSE);
 
-	m_AdjColDlg.DoModal();	//-- create the Adjust Colour Dialog Box
+	m_AdjColDlg->DoModal();	//-- create the Adjust Colour Dialog Box
 
 	m_Bkcolour = pdata->Bkcolour;
 	UpdateData(FALSE);
@@ -2832,7 +2823,7 @@ void CMyrosot1Dlg::OnAdjustrangeButton()
 void CMyrosot1Dlg::OnGrabberSettings() 
 {
 	//-- invoke the settings form
-	m_GrabberSettingsDlg.DoModal();	
+	m_GrabberSettingsDlg->DoModal();	
 }
 
 void CMyrosot1Dlg::OnKickstartRadio() 

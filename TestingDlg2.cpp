@@ -1,8 +1,6 @@
 // TestingDlg.cpp : implementation file
 //
-
 #include "stdafx.h"
-#include "myrosot1.h"
 #include "TestingDlg2.h"
 
 

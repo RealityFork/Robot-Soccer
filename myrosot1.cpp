@@ -1,9 +1,8 @@
 // myrosot1.cpp : Defines the class behaviors for the application.
 //
-
 #include "stdafx.h"
 #include "myrosot1.h"
-#include "myrosot1Dlg.h"
+
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
