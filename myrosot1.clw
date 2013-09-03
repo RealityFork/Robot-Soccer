@@ -2,7 +2,7 @@
 
 [General Info]
 Version=1
-LastClass=CTuningDlg
+LastClass=CAdjColDlg
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "myrosot1.h"
@@ -285,7 +285,7 @@ HeaderFile=AdjColDlg.h
 ImplementationFile=AdjColDlg.cpp
 BaseClass=CDialog
 Filter=D
-LastObject=IDC_BLACKBACKGROUND_CHECK
+LastObject=IDC_BALLCOLVMAX_EDIT
 VirtualFilter=dWC
 
 [DLG:IDD_RFCOMM_DIALOG]
@@ -499,7 +499,7 @@ HeaderFile=TuningDlg.h
 ImplementationFile=TuningDlg.cpp
 BaseClass=CDialog
 Filter=D
-LastObject=IDC_ABACKOFFDISTANCE_EDIT
+LastObject=CTuningDlg
 VirtualFilter=dWC
 
 [DLG:IDD_TESTING_DIALOG]
@@ -646,7 +646,7 @@ Control98=IDC_TIME_EDIT,edit,1350631552
 
 [DLG:IDD_ADJUSTCOLOURS_DIALOG (English (U.S.))]
 Type=1
-Class=?
+Class=CAdjColDlg
 ControlCount=82
 Control1=IDOK,button,1342242817
 Control2=IDC_BALLCOLYMIN_SCROLLBAR,scrollbar,1342177280
@@ -769,7 +769,7 @@ Control31=IDC_STATIC,static,1342308352
 
 [DLG:IDD_PARAMETERS_DIALOG (English (U.S.))]
 Type=1
-Class=?
+Class=CParameters
 ControlCount=32
 Control1=IDOK,button,1342242817
 Control2=IDCANCEL,button,1342242816

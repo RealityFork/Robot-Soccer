@@ -63,6 +63,7 @@ class CMyrosot1Dlg : public CDialog
 public:
 
 	CMyrosot1Dlg(CWnd* pParent = NULL);	// standard constructor
+	~CMyrosot1Dlg() {delete globaldata.gBehaviour; delete globaldata.r1Behaviour; delete globaldata.r2Behaviour;};
 
 	CAdjColDlg *m_AdjColDlg;		//-- Adjust Colour Dialog Box
 	CRFCommDlg *m_RFCommDlg;		//-- RF Communication Dialog Box
@@ -70,7 +71,7 @@ public:
 	CAdjGameArea *m_AdjGameAreaDlg;	//-- Adjust Game Area Dialog Box
 	CGrabberSettingsDlg *m_GrabberSettingsDlg;//-- Grabber settings dialog Box
 	CTuningDlg *m_TuningDlg;	//-- Dialog Box for tuning
-
+	
 // Dialog Data
 	//{{AFX_DATA(CMyrosot1Dlg)
 	enum { IDD = IDD_MYROSOT1_DIALOG };

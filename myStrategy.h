@@ -11,6 +11,8 @@
 #include "map.h"
 #include "math.h"
 #include "BehaviourGoalie.h"
+#include "BehaviourStriker.h"
+#include "BehaviourDefender.h"
 #include "BehaviourRobot.h"
 
 #define ROBOTWIDTH	7.6
