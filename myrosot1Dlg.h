@@ -29,6 +29,8 @@
 #include "fbus.h"
 #include "testingDlg2.h"
 #include "controlalgo.h"
+#include "BehaviourStriker.h"
+#include "BehaviourDefender.h"
 
 class CAdjColDlg;
 class CGrabberSettingsDlg;

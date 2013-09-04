@@ -7,7 +7,7 @@
 </h3>
 <h3>Command Lines</h3>
 Creating command line "rc.exe /l 0x409 /fo"Release/myrosot1.res" /d "NDEBUG" /d "_AFXDLL" "G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\myrosot1.rc"" 
-Creating temporary file "C:\Users\MystX\AppData\Local\Temp\RSP60AD.tmp" with contents
+Creating temporary file "C:\Users\MystX\AppData\Local\Temp\RSP362E.tmp" with contents
 [
 /nologo /G5 /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /FR"Release/" /Fp"Release/myrosot1.pch" /Yu"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
 "G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\AdjColDlg.cpp"
@@ -23,8 +23,8 @@ Creating temporary file "C:\Users\MystX\AppData\Local\Temp\RSP60AD.tmp" with con
 "G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\TestingDlg2.cpp"
 "G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\TuningDlg.cpp"
 ]
-Creating command line "cl.exe @C:\Users\MystX\AppData\Local\Temp\RSP60AD.tmp" 
-Creating temporary file "C:\Users\MystX\AppData\Local\Temp\RSP60AE.tmp" with contents
+Creating command line "cl.exe @C:\Users\MystX\AppData\Local\Temp\RSP362E.tmp" 
+Creating temporary file "C:\Users\MystX\AppData\Local\Temp\RSP362F.tmp" with contents
 [
 /nologo /G5 /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /FR"Release/" /Fo"Release/" /Fd"Release/" /FD /c 
 "G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\AdjGameArea.cpp"
@@ -32,14 +32,14 @@ Creating temporary file "C:\Users\MystX\AppData\Local\Temp\RSP60AE.tmp" with con
 "G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\BehaviourStriker.cpp"
 "G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\BevahiourDefender.cpp"
 ]
-Creating command line "cl.exe @C:\Users\MystX\AppData\Local\Temp\RSP60AE.tmp" 
-Creating temporary file "C:\Users\MystX\AppData\Local\Temp\RSP60AF.tmp" with contents
+Creating command line "cl.exe @C:\Users\MystX\AppData\Local\Temp\RSP362F.tmp" 
+Creating temporary file "C:\Users\MystX\AppData\Local\Temp\RSP3630.tmp" with contents
 [
 /nologo /G5 /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /FR"Release/" /Fp"Release/myrosot1.pch" /Yc"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
 "G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\StdAfx.cpp"
 ]
-Creating command line "cl.exe @C:\Users\MystX\AppData\Local\Temp\RSP60AF.tmp" 
-Creating temporary file "C:\Users\MystX\AppData\Local\Temp\RSP60BF.tmp" with contents
+Creating command line "cl.exe @C:\Users\MystX\AppData\Local\Temp\RSP3630.tmp" 
+Creating temporary file "C:\Users\MystX\AppData\Local\Temp\RSP3641.tmp" with contents
 [
 winmm.lib user32.lib fbus32.lib /nologo /subsystem:windows /incremental:yes /pdb:"Release/myrosot1.pdb" /machine:I386 /out:"Release/myrosot1.exe" 
 ".\Release\AdjColDlg.obj"
@@ -62,7 +62,7 @@ winmm.lib user32.lib fbus32.lib /nologo /subsystem:windows /incremental:yes /pdb
 ".\Release\BehaviourStriker.obj"
 ".\Release\BevahiourDefender.obj"
 ]
-Creating command line "link.exe @C:\Users\MystX\AppData\Local\Temp\RSP60BF.tmp"
+Creating command line "link.exe @C:\Users\MystX\AppData\Local\Temp\RSP3641.tmp"
 <h3>Output Window</h3>
 Compiling resources...
 Compiling...
@@ -120,7 +120,7 @@ BevahiourDefender.cpp
 C:\Microsoft Visual C++ 6.0 Standard Edition\VC98\INCLUDE\math.h(426) : warning C4091: 'extern __declspec(dllimport ) ' : ignored on left of 'double' when no variable is declared
 Generating Code...
 Linking...
-Creating temporary file "C:\Users\MystX\AppData\Local\Temp\RSP886C.tmp" with contents
+Creating temporary file "C:\Users\MystX\AppData\Local\Temp\RSP677F.tmp" with contents
 [
 /nologo /o"Release/myrosot1.bsc" 
 ".\Release\StdAfx.sbr"
@@ -140,7 +140,7 @@ Creating temporary file "C:\Users\MystX\AppData\Local\Temp\RSP886C.tmp" with con
 ".\Release\TuningDlg.sbr"
 ".\Release\BehaviourStriker.sbr"
 ".\Release\BevahiourDefender.sbr"]
-Creating command line "bscmake.exe @C:\Users\MystX\AppData\Local\Temp\RSP886C.tmp"
+Creating command line "bscmake.exe @C:\Users\MystX\AppData\Local\Temp\RSP677F.tmp"
 Creating browse info file...
 <h3>Output Window</h3>
 
