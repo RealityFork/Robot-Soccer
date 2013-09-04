@@ -656,7 +656,7 @@ void myStrategy()
 
 	case 7://---- State Based goal defense, the goal keeper
 		{
-			//globaldata.gBehaviour->runAction();
+			globaldata.gBehaviour->runAction();
 		}
 		break;
 
@@ -667,9 +667,9 @@ void myStrategy()
 	case 10://---- Kick Start + Normal game
 			//-- insert code here to play the game
 		{
-		/*globaldata.gBehaviour->runAction();
+		globaldata.gBehaviour->runAction();
 		globaldata.r1Behaviour->runAction();
-		globaldata.r2Behaviour->runAction();*/
+		globaldata.r2Behaviour->runAction();
 		}
 
 		break;
