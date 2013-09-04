@@ -1,7 +1,6 @@
 // myrosot1Dlg.h : header file
 //
 
-
 #if !defined(AFX_MYROSOT1DLG_H__F3F95E86_E074_11D2_8B75_817FE7DC6734__INCLUDED_)
 #define AFX_MYROSOT1DLG_H__F3F95E86_E074_11D2_8B75_817FE7DC6734__INCLUDED_
 
@@ -65,14 +64,14 @@ class CMyrosot1Dlg : public CDialog
 public:
 
 	CMyrosot1Dlg(CWnd* pParent = NULL);	// standard constructor
-	~CMyrosot1Dlg() {delete globaldata.gBehaviour; delete globaldata.r1Behaviour; delete globaldata.r2Behaviour;};
+	~CMyrosot1Dlg() {/*delete globaldata.gBehaviour; delete globaldata.r1Behaviour; delete globaldata.r2Behaviour;*/};
 
-	CAdjColDlg *m_AdjColDlg;		//-- Adjust Colour Dialog Box
-	CRFCommDlg *m_RFCommDlg;		//-- RF Communication Dialog Box
-	CParameters *m_ParametersDlg;//-- Parameters Dialog Box
-	CAdjGameArea *m_AdjGameAreaDlg;	//-- Adjust Game Area Dialog Box
+	CAdjColDlg          *m_AdjColDlg;	  	 //-- Adjust Colour Dialog Box
+	CRFCommDlg          *m_RFCommDlg;	 	 //-- RF Communication Dialog Box
+	CParameters         *m_ParametersDlg;     //-- Parameters Dialog Box
+	CAdjGameArea        *m_AdjGameAreaDlg;	 //-- Adjust Game Area Dialog Box
 	CGrabberSettingsDlg *m_GrabberSettingsDlg;//-- Grabber settings dialog Box
-	CTuningDlg *m_TuningDlg;	//-- Dialog Box for tuning
+	CTuningDlg          *m_TuningDlg;	     //-- Dialog Box for tuning
 	
 // Dialog Data
 	//{{AFX_DATA(CMyrosot1Dlg)

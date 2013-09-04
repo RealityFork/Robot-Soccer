@@ -74,6 +74,13 @@ CMyrosot1Dlg::CMyrosot1Dlg(CWnd* pParent /*=NULL*/)
 	: CDialog(CMyrosot1Dlg::IDD, pParent)
 {
 	//{{AFX_DATA_INIT(CMyrosot1Dlg)
+
+	m_AdjColDlg = new CAdjColDlg(this);
+	m_RFCommDlg = new CRFCommDlg(this);
+	m_ParametersDlg = new CParameters(this);
+	m_GrabberSettingsDlg = new CGrabberSettingsDlg(this);
+	m_TuningDlg = new CTuningDlg(this);
+
 	m_SetBoundary = -1;
 	m_Red = 0;
 	m_Green = 0;
@@ -695,9 +702,9 @@ BOOL CMyrosot1Dlg::OnInitDialog()
 	nCount=-1;//-- so first frame is not processed initially
 
 	// Behaviour instances
-	pdata->gBehaviour  = new CGoalieAction  (HGOALIE, 0);
-	pdata->r1Behaviour = new CDefenderAction(HROBOT1, 0);
-	pdata->r2Behaviour = new CStrikerAction (HROBOT2, 0);
+	//pdata->gBehaviour  = new CGoalieAction  (HGOALIE, 0);
+	//pdata->r1Behaviour = new CDefenderAction(HROBOT1, 0);
+	//pdata->r2Behaviour = new CStrikerAction (HROBOT2, 0);
 	
 
 	return TRUE;

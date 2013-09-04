@@ -229,9 +229,9 @@ struct commondata
 
 	// These are used to maintain the same instances
 	// Instantiated at the bottom of CMyrosot1Dlg::OnInitDialog()
-	RobotBehaviour *gBehaviour;
+	/*RobotBehaviour *gBehaviour;
 	RobotBehaviour *r1Behaviour;
-	RobotBehaviour *r2Behaviour;
+	RobotBehaviour *r2Behaviour;*/
 
 };	//-- end of structure commondata
 
