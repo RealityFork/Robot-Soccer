@@ -64,7 +64,7 @@ class CMyrosot1Dlg : public CDialog
 public:
 
 	CMyrosot1Dlg(CWnd* pParent = NULL);	// standard constructor
-	~CMyrosot1Dlg() {/*delete globaldata.gBehaviour; delete globaldata.r1Behaviour; delete globaldata.r2Behaviour;*/};
+	~CMyrosot1Dlg() {delete globaldata.gBehaviour; delete globaldata.r1Behaviour; delete globaldata.r2Behaviour;};
 
 	CAdjColDlg          *m_AdjColDlg;	  	 //-- Adjust Colour Dialog Box
 	CRFCommDlg          *m_RFCommDlg;	 	 //-- RF Communication Dialog Box

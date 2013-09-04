@@ -702,9 +702,9 @@ BOOL CMyrosot1Dlg::OnInitDialog()
 	nCount=-1;//-- so first frame is not processed initially
 
 	// Behaviour instances
-	pdata->gBehaviour  = new CGoalieAction  (HGOALIE, 0);
-	pdata->r1Behaviour = new CDefenderAction(HROBOT1, 0);
-	pdata->r2Behaviour = new CStrikerAction (HROBOT2, 0);
+	pdata->gBehaviour  = new CGoalieAction  (HGOALIE, &(globaldata.GState));
+	pdata->r1Behaviour = new CDefenderAction(HROBOT1, &(globaldata.R1State));
+	pdata->r2Behaviour = new CStrikerAction (HROBOT2, &(globaldata.R2State));
 	
 
 	return TRUE;
