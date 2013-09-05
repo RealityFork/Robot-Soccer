@@ -8,6 +8,8 @@
 #include "TuningDlg.h"
 #include "RFCommDlg.h"
 #include "Parameters.h"
+#include "DebugDlg.h"
+#include "Debug.h"
 
 
 #ifdef _DEBUG
@@ -316,7 +318,10 @@ BOOL FBUSINSTALLED;	//-- is the Vision Card installed?
 BOOL CMyrosot1Dlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
-
+	m_debugDlg = new DebugDlg(this);
+	m_debugDlg->Create(IDD_DEBUGDLG, this);
+	m_debugDlg->ShowWindow(SW_SHOW);
+	
 	// Add "About..." menu item to system menu.
 
 	// IDM_ABOUTBOX must be in the system command range.
@@ -410,6 +415,8 @@ BOOL CMyrosot1Dlg::OnInitDialog()
 
 	//-- make pdata point to the global variable which stores all common data
 	pdata = &globaldata;
+	pdata->debugDlg = m_debugDlg;
+	Debug::init();
 	pdata->pmainwindow = this;	//-- pointer to the main dialog window
 
 	pdata->timer1_installed = FALSE;	//-- initially timer is not installed
@@ -705,7 +712,6 @@ BOOL CMyrosot1Dlg::OnInitDialog()
 	pdata->gBehaviour  = new CGoalieAction  (HGOALIE, &(globaldata.GState));
 	pdata->r1Behaviour = new CDefenderAction(HROBOT1, &(globaldata.R1State));
 	pdata->r2Behaviour = new CStrikerAction (HROBOT2, &(globaldata.R2State));
-	
 
 	return TRUE;
 }

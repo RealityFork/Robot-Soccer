@@ -37,7 +37,7 @@ class CAdjGameArea;
 class CRFCommDlg;
 class CParameters;
 class CTuningDlg;
-
+class DebugDlg;
 //UINT gameThread(LPVOID pParam);
 //UINT txThread(LPVOID pParam);
 
@@ -72,7 +72,8 @@ public:
 	CAdjGameArea        *m_AdjGameAreaDlg;	 //-- Adjust Game Area Dialog Box
 	CGrabberSettingsDlg *m_GrabberSettingsDlg;//-- Grabber settings dialog Box
 	CTuningDlg          *m_TuningDlg;	     //-- Dialog Box for tuning
-	
+	DebugDlg			*m_debugDlg;
+
 // Dialog Data
 	//{{AFX_DATA(CMyrosot1Dlg)
 	enum { IDD = IDD_MYROSOT1_DIALOG };

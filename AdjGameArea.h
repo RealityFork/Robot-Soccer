@@ -1,16 +1,18 @@
 #if !defined(AFX_ADJGAMEAREA_H__D02C4561_6B59_11D3_8E3E_D081DE4DDE35__INCLUDED_)
 #define AFX_ADJGAMEAREA_H__D02C4561_6B59_11D3_8E3E_D081DE4DDE35__INCLUDED_
 
+#include "stdafx.h"
+#include "myrosot1.h"
+#include "commondata.h"
+#include "vision.h"
+
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
 // AdjGameArea.h : header file
 //
 
-#include "stdafx.h"
-#include "myrosot1.h"
-#include "commondata.h"
-#include "vision.h"
+
 
 /////////////////////////////////////////////////////////////////////////////
 // CAdjGameArea dialog

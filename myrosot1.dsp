@@ -172,6 +172,23 @@ SOURCE=.\controlalgo.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\Debug.cpp
+
+!IF  "$(CFG)" == "myrosot1 - Win32 Release"
+
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "myrosot1 - Win32 Debug"
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\DebugDlg.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\GrabberSettingsDlg.cpp
 
 !IF  "$(CFG)" == "myrosot1 - Win32 Release"
@@ -272,6 +289,14 @@ SOURCE=.\commondata.h
 # Begin Source File
 
 SOURCE=.\controlalgo.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Debug.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\DebugDlg.h
 # End Source File
 # Begin Source File
 

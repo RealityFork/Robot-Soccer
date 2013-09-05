@@ -16,6 +16,7 @@
 #define IDD_GRABBERSETTINGS_DIALOG      137
 #define IDD_TUNING_DIALOG               138
 #define IDD_TESTING_DIALOG              139
+#define IDD_DEBUGDLG                    140
 #define IDC_MAPCOLOURS_RADIO            1004
 #define IDC_SETBOUNDARIES_RADIO         1005
 #define IDC_FIELDAREA_RADIO             1006
@@ -251,6 +252,11 @@
 #define IDC_ADJUSTBOUNDARY_STATIC       1215
 #define IDC_DISPLAYBOUNDARIES_CHECK     1219
 #define IDC_TIME_EDIT                   1220
+#define checkDebug                      1226
+#define checkInfo                       1227
+#define checkWarning                    1228
+#define checkError                      1229
+#define debugEdit                       1230
 #define ID_FILE_EXIT                    32771
 #define ID_HELP_ABOUT                   32772
 #define ID_UTILS_RFCOMM                 32780
@@ -264,9 +270,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        139
+#define _APS_NEXT_RESOURCE_VALUE        141
 #define _APS_NEXT_COMMAND_VALUE         32786
-#define _APS_NEXT_CONTROL_VALUE         1226
+#define _APS_NEXT_CONTROL_VALUE         1231
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

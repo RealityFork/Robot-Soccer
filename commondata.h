@@ -9,6 +9,7 @@
 //#include "BehaviourRobot.h"
 class CGoalieAction;
 class RobotBehaviour;
+class DebugDlg;
 
 enum play_area {LEFT_AREA, RIGHT_AREA};
 enum Diagnostic_Level {OFF, LOW, HIGH};
@@ -232,6 +233,7 @@ struct commondata
 	RobotBehaviour *gBehaviour;
 	RobotBehaviour *r1Behaviour;
 	RobotBehaviour *r2Behaviour;
+	DebugDlg *debugDlg;
 
 };	//-- end of structure commondata
 

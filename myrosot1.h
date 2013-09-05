@@ -7,14 +7,14 @@
 #if _MSC_VER >= 1000
 #pragma once
 #endif // _MSC_VER >= 1000
-
+#include "resource.h"		// main symbols
+#include "myrosot1Dlg.h"
+#include "stdafx.h"
 #ifndef __AFXWIN_H__
 	#error include 'stdafx.h' before including this file for PCH
 #endif
 
-#include "resource.h"		// main symbols
-#include "myrosot1Dlg.h"
-#include "stdafx.h"
+
 /////////////////////////////////////////////////////////////////////////////
 // CMyrosot1App:
 // See myrosot1.cpp for the implementation of this class

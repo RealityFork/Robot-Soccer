@@ -2,20 +2,20 @@
 
 [General Info]
 Version=1
-LastClass=CAdjColDlg
+LastClass=DebugDlg
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "myrosot1.h"
 
-ClassCount=10
+ClassCount=11
 Class1=CMyrosot1App
 Class2=CMyrosot1Dlg
 Class3=CAboutDlg
 
-ResourceCount=20
+ResourceCount=21
 Resource1=IDD_TESTING_DIALOG
 Resource2=IDD_GRABBERSETTINGS_DIALOG
-Resource3=IDD_ABOUTBOX (English (U.S.))
+Resource3=IDD_RFCOMM_DIALOG (English (U.S.))
 Class4=CAdjColDlg
 Resource4=IDD_ADJUSTGAMEAREA_DIALOG
 Class5=CRFCommDlg
@@ -23,23 +23,25 @@ Resource5=IDD_ADJUSTCOLOURS_DIALOG
 Class6=CParameters
 Resource6=IDD_ABOUTBOX
 Class7=CAdjGameArea
-Resource7=IDD_ADJUSTCOLOURS_DIALOG (English (U.S.))
+Resource7=IDD_GRABBERSETTINGS_DIALOG (English (U.S.))
 Class8=CGrabberSettingsDlg
-Resource8=IDD_GRABBERSETTINGS_DIALOG (English (U.S.))
+Resource8=IDR_MAINFRAME (English (U.S.))
 Class9=CTuningDlg
 Resource9=IDD_RFCOMM_DIALOG
 Class10=CTestingDlg
 Resource10=IDD_PARAMETERS_DIALOG
-Resource11=IDD_ADJUSTGAMEAREA_DIALOG (English (U.S.))
+Resource11=IDD_TESTING_DIALOG (English (U.S.))
 Resource12=IDR_MAINFRAME
 Resource13=IDD_TUNING_DIALOG
-Resource14=IDD_TESTING_DIALOG (English (U.S.))
-Resource15=IDD_TUNING_DIALOG (English (U.S.))
-Resource16=IDD_MYROSOT1_DIALOG (English (U.S.))
+Resource14=IDD_TUNING_DIALOG (English (U.S.))
+Resource15=IDD_MYROSOT1_DIALOG (English (U.S.))
+Resource16=IDD_ADJUSTCOLOURS_DIALOG (English (U.S.))
 Resource17=IDD_MYROSOT1_DIALOG
-Resource18=IDD_RFCOMM_DIALOG (English (U.S.))
+Resource18=IDD_ADJUSTGAMEAREA_DIALOG (English (U.S.))
 Resource19=IDD_PARAMETERS_DIALOG (English (U.S.))
-Resource20=IDR_MAINFRAME (English (U.S.))
+Resource20=IDD_ABOUTBOX (English (U.S.))
+Class11=DebugDlg
+Resource21=IDD_DEBUGDLG
 
 [CLS:CMyrosot1App]
 Type=0
@@ -285,7 +287,7 @@ HeaderFile=AdjColDlg.h
 ImplementationFile=AdjColDlg.cpp
 BaseClass=CDialog
 Filter=D
-LastObject=IDC_BALLCOLVMAX_EDIT
+LastObject=CAdjColDlg
 VirtualFilter=dWC
 
 [DLG:IDD_RFCOMM_DIALOG]
@@ -533,7 +535,7 @@ VirtualFilter=dWC
 
 [DLG:IDD_ABOUTBOX (English (U.S.))]
 Type=1
-Class=?
+Class=CAboutDlg
 ControlCount=5
 Control1=IDC_STATIC,static,1342177283
 Control2=IDC_STATIC,static,1342308480
@@ -806,7 +808,7 @@ Control32=IDC_STATIC,button,1342177287
 
 [DLG:IDD_ADJUSTGAMEAREA_DIALOG (English (U.S.))]
 Type=1
-Class=?
+Class=CAdjGameArea
 ControlCount=17
 Control1=IDOK,button,1342242817
 Control2=IDC_LEFT_LEFT_BUTTON,button,1342242816
@@ -828,7 +830,7 @@ Control17=IDC_OPPOGOALAREA_RADIO,button,1342177289
 
 [DLG:IDD_GRABBERSETTINGS_DIALOG (English (U.S.))]
 Type=1
-Class=?
+Class=CGrabberSettingsDlg
 ControlCount=18
 Control1=IDOK,button,1342242817
 Control2=IDCANCEL,button,1342242816
@@ -902,7 +904,7 @@ Control46=IDC_FOLLOWCLICK_CHECK,button,1342251011
 
 [DLG:IDD_TESTING_DIALOG (English (U.S.))]
 Type=1
-Class=?
+Class=CTestingDlg
 ControlCount=15
 Control1=IDOK,button,1342242817
 Control2=IDC_RADIO_CASE0,button,1342177289
@@ -932,4 +934,23 @@ Command6=ID_UTILS_TUNING
 Command7=ID_UTILS_TESTING
 Command8=ID_HELP_ABOUT
 CommandCount=8
+
+[CLS:DebugDlg]
+Type=0
+HeaderFile=DebugDlg.h
+ImplementationFile=DebugDlg.cpp
+BaseClass=CDialog
+Filter=D
+LastObject=IDC_EDIT1
+VirtualFilter=dWC
+
+[DLG:IDD_DEBUGDLG]
+Type=1
+Class=DebugDlg
+ControlCount=5
+Control1=checkDebug,button,1342242819
+Control2=checkInfo,button,1342242819
+Control3=checkWarning,button,1342242819
+Control4=checkError,button,1342242819
+Control5=debugEdit,edit,1352728772
 
