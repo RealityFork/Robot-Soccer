@@ -62,7 +62,12 @@ BOOL CDefenderAction::S1S3()
 		pos = globaldata.robot2posS;
 		break;
 	}
-	return hasBall(pos);
+	if (hasBall(pos))
+	{
+		clearVel = 0;
+		return true;
+	}
+	return false;
 }
 BOOL CDefenderAction::S1S4()
 {
@@ -141,7 +146,9 @@ void CDefenderAction::S3()//----	Clear
 	//finalPos.y = (globaldata.GballposS.y - ((globaldata.GballposS.x - finalPos.x)/tan(ballAngle * 3.14159265 / 180.0)));
 	target.y = globaldata.robot1pos.y + sin(angle*PI/180.0)*clearIncDist;
 	target.x = globaldata.robot1pos.x + cos(angle*PI/180.0)*clearIncDist;
+	clearVel++;
 
+	position(which, target, 0, clearVel); // Might need to change angle.
 }
 void CDefenderAction::S4()//----	Assist
 {
