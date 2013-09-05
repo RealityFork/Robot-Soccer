@@ -8,6 +8,8 @@
 #include "map.h"
 #include "math.h"
 #include "BehaviourRobot.h"
+#include "Debug.h"
+#include "myStrategy.h"
 
 class CDefenderAction : public RobotBehaviour //----- To defend the goal from attack by opponent
 {
@@ -16,6 +18,13 @@ private:
 	float MIDDLE_X;
 	int *pstate;
 	int which; //---- which robot we're referring to
+	int innerState;
+	int clearVel;
+	int clearIncDist;
+	int hasBallDist;
+	floatPOINT loiterPos, trackingPos;
+
+	BOOL hasBall(floatPOINT);
 	
 public:
 	CDefenderAction(int w, int *ps);

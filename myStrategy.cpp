@@ -533,21 +533,20 @@ void myShoot(int which, floatPOINT *targetPos)
 			d = 0;
 
 
-if(d==0)
-	angle(which, angle3);
-else{
+	if(d==0)
+		angle(which, angle3);
+	else{
 
-	Vl = d*speed - Ka*angleError;
-	Vr = d*speed + Ka*angleError;
+		Vl = d*speed - Ka*angleError;
+		Vr = d*speed + Ka*angleError;
 
-	velocity(which, Vl, Vr);
+		velocity(which, Vl, Vr);
+	}
 }
 
-
-
-
+void myTackle()
+{
 }
-
 
 ////////////////////////////////////////////////////
 void myStrategy()

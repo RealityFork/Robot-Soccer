@@ -3,76 +3,104 @@
 <pre>
 <h1>Build Log</h1>
 <h3>
---------------------Configuration: myrosot1 - Win32 Release--------------------
+--------------------Configuration: myrosot1 - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\Users\MystX\AppData\Local\Temp\RSP2474.tmp" with contents
+Creating temporary file "C:\Users\MystX\AppData\Local\Temp\RSP2D22.tmp" with contents
 [
-/nologo /G5 /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /FR"Release/" /Fo"Release/" /Fd"Release/" /FD /c 
-"G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer\Debug.cpp"
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /FR"Debug/" /Fo"Debug/" /Fd"Debug/" /FD /c 
+"G:\Uni\Fourth Year\Advanced Computer Systems\Robot-Soccer - Copy\BevahiourDefender.cpp"
 ]
-Creating command line "cl.exe @C:\Users\MystX\AppData\Local\Temp\RSP2474.tmp" 
-Creating temporary file "C:\Users\MystX\AppData\Local\Temp\RSP2475.tmp" with contents
+Creating command line "cl.exe @C:\Users\MystX\AppData\Local\Temp\RSP2D22.tmp" 
+Creating temporary file "C:\Users\MystX\AppData\Local\Temp\RSP2D23.tmp" with contents
 [
-winmm.lib user32.lib fbus32.lib /nologo /subsystem:windows /incremental:yes /pdb:"Release/myrosot1.pdb" /machine:I386 /out:"Release/myrosot1.exe" 
-".\Release\AdjColDlg.obj"
-".\Release\AdjGameArea.obj"
-".\Release\BehaviourGoalie.obj"
-".\Release\BehaviourStriker.obj"
-".\Release\BevahiourDefender.obj"
-".\Release\controlalgo.obj"
-".\Release\GrabberSettingsDlg.obj"
-".\Release\map.obj"
-".\Release\myrosot1.obj"
-".\Release\myrosot1Dlg.obj"
-".\Release\myStrategy.obj"
-".\Release\Parameters.obj"
-".\Release\RFComm.obj"
-".\Release\RFCommDlg.obj"
-".\Release\StdAfx.obj"
-".\Release\TestingDlg2.obj"
-".\Release\TuningDlg.obj"
+winmm.lib user32.lib fbus32.lib /subsystem:windows /incremental:yes /pdb:"Debug/myrosot1.pdb" /debug /machine:I386 /out:"Debug/myrosot1.exe" /pdbtype:sept 
+".\Debug\AdjColDlg.obj"
+".\Debug\AdjGameArea.obj"
+".\Debug\BehaviourGoalie.obj"
+".\Debug\BehaviourStriker.obj"
+".\Debug\BevahiourDefender.obj"
+".\Debug\controlalgo.obj"
+".\Debug\Debug.obj"
+".\Debug\DebugDlg.obj"
+".\Debug\GrabberSettingsDlg.obj"
+".\Debug\map.obj"
+".\Debug\myrosot1.obj"
+".\Debug\myrosot1Dlg.obj"
+".\Debug\myStrategy.obj"
+".\Debug\Parameters.obj"
+".\Debug\RFComm.obj"
+".\Debug\RFCommDlg.obj"
+".\Debug\StdAfx.obj"
+".\Debug\TestingDlg2.obj"
+".\Debug\TuningDlg.obj"
 ".\vision.obj"
-".\Release\myrosot1.res"
-".\Release\DebugDlg.obj"
-".\Release\Debug.obj"
+".\Debug\myrosot1.res"
 ]
-Creating command line "link.exe @C:\Users\MystX\AppData\Local\Temp\RSP2475.tmp"
+Creating command line "link.exe @C:\Users\MystX\AppData\Local\Temp\RSP2D23.tmp"
 <h3>Output Window</h3>
 Compiling...
-Debug.cpp
-C:\Microsoft Visual C++ 6.0 Standard Edition\VC98\INCLUDE\math.h(426) : warning C4091: 'extern __declspec(dllimport ) ' : ignored on left of 'double' when no variable is declared
+BevahiourDefender.cpp
+c:\microsoft visual c++ 6.0 standard edition\vc98\include\math.h(426) : warning C4091: 'extern __declspec(dllimport ) ' : ignored on left of 'double' when no variable is declared
+g:\uni\fourth year\advanced computer systems\robot-soccer - copy\bevahiourdefender.cpp(137) : warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+g:\uni\fourth year\advanced computer systems\robot-soccer - copy\bevahiourdefender.cpp(142) : warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+g:\uni\fourth year\advanced computer systems\robot-soccer - copy\bevahiourdefender.cpp(143) : warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
 Linking...
-Creating temporary file "C:\Users\MystX\AppData\Local\Temp\RSP2A7E.tmp" with contents
+Microsoft (R) Incremental Linker Version 6.00.8168
+Copyright (C) Microsoft Corp 1992-1998. All rights reserved.
+
+winmm.lib user32.lib fbus32.lib /subsystem:windows /incremental:yes "/pdb:Debug/myrosot1.pdb" /debug /machine:I386 "/out:Debug/myrosot1.exe" /pdbtype:sept 
+".\Debug\AdjColDlg.obj" 
+".\Debug\AdjGameArea.obj" 
+".\Debug\BehaviourGoalie.obj" 
+".\Debug\BehaviourStriker.obj" 
+".\Debug\BevahiourDefender.obj" 
+".\Debug\controlalgo.obj" 
+".\Debug\Debug.obj" 
+".\Debug\DebugDlg.obj" 
+".\Debug\GrabberSettingsDlg.obj" 
+".\Debug\map.obj" 
+".\Debug\myrosot1.obj" 
+".\Debug\myrosot1Dlg.obj" 
+".\Debug\myStrategy.obj" 
+".\Debug\Parameters.obj" 
+".\Debug\RFComm.obj" 
+".\Debug\RFCommDlg.obj" 
+".\Debug\StdAfx.obj" 
+".\Debug\TestingDlg2.obj" 
+".\Debug\TuningDlg.obj" 
+".\vision.obj" 
+".\Debug\myrosot1.res" 
+Creating temporary file "C:\Users\MystX\AppData\Local\Temp\RSP332C.tmp" with contents
 [
-/nologo /o"Release/myrosot1.bsc" 
-".\Release\StdAfx.sbr"
-".\Release\AdjColDlg.sbr"
-".\Release\AdjGameArea.sbr"
-".\Release\BehaviourGoalie.sbr"
-".\Release\BehaviourStriker.sbr"
-".\Release\BevahiourDefender.sbr"
-".\Release\controlalgo.sbr"
-".\Release\GrabberSettingsDlg.sbr"
-".\Release\map.sbr"
-".\Release\myrosot1.sbr"
-".\Release\myrosot1Dlg.sbr"
-".\Release\myStrategy.sbr"
-".\Release\Parameters.sbr"
-".\Release\RFComm.sbr"
-".\Release\RFCommDlg.sbr"
-".\Release\TestingDlg2.sbr"
-".\Release\TuningDlg.sbr"
-".\Release\DebugDlg.sbr"
-".\Release\Debug.sbr"]
-Creating command line "bscmake.exe @C:\Users\MystX\AppData\Local\Temp\RSP2A7E.tmp"
+/nologo /o"Debug/myrosot1.bsc" 
+".\Debug\StdAfx.sbr"
+".\Debug\AdjColDlg.sbr"
+".\Debug\AdjGameArea.sbr"
+".\Debug\BehaviourGoalie.sbr"
+".\Debug\BehaviourStriker.sbr"
+".\Debug\BevahiourDefender.sbr"
+".\Debug\controlalgo.sbr"
+".\Debug\Debug.sbr"
+".\Debug\DebugDlg.sbr"
+".\Debug\GrabberSettingsDlg.sbr"
+".\Debug\map.sbr"
+".\Debug\myrosot1.sbr"
+".\Debug\myrosot1Dlg.sbr"
+".\Debug\myStrategy.sbr"
+".\Debug\Parameters.sbr"
+".\Debug\RFComm.sbr"
+".\Debug\RFCommDlg.sbr"
+".\Debug\TestingDlg2.sbr"
+".\Debug\TuningDlg.sbr"]
+Creating command line "bscmake.exe @C:\Users\MystX\AppData\Local\Temp\RSP332C.tmp"
 Creating browse info file...
 <h3>Output Window</h3>
 
 
 
 <h3>Results</h3>
-myrosot1.exe - 0 error(s), 1 warning(s)
+myrosot1.exe - 0 error(s), 4 warning(s)
 </pre>
 </body>
 </html>

@@ -28,5 +28,6 @@ void myStrategy(void);
 void placeRobots(void);
 
 void myShoot(int which, floatPOINT *targetPos);
+void myTackle();
 
 #endif

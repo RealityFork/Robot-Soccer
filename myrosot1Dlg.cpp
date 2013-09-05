@@ -1854,6 +1854,7 @@ void CMyrosot1Dlg::OnGetreadyButton()
 	//-- game has started
 	if ( !pdata->start )
 	{
+
 		if (pdata->LUTupdated)
 		{
 			m_Diagnostics = pdata->diagnostics = LOW;	//-- diagnostics LOW
@@ -1941,11 +1942,8 @@ void CMyrosot1Dlg::OnGetreadyButton()
 
 			//-- pdata->fullFrame is TRUE at this point
 			if(pdata->fullFrame)
-			{
 				fullTracking(pdata, FROMGETREADY);
-				//-- Calculate strategy variables
-				mapall(pdata);
-			}
+			mapall(pdata);
 			//-- transfer the starting ball position
 			pdata->StartBallPosS = pdata->ballposS;
 
@@ -2209,7 +2207,9 @@ void CMyrosot1Dlg::OnGetreadyButton()
 		else
 			MessageBox("LUT not updated..", "LUT ERROR", MB_ICONSTOP);
 	}
-	
+	//-- Calculate strategy variables
+	mapall(pdata);
+
 	delete globaldata.gBehaviour;
 	delete globaldata.r1Behaviour;
 	delete globaldata.r2Behaviour;

@@ -1,6 +1,6 @@
 // AdjGameArea.cpp : implementation file
 //
-
+#include "stdafx.h"
 #include "AdjGameArea.h"
 
 
