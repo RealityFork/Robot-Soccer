@@ -4,7 +4,7 @@ CGoalieAction::CGoalieAction(int w, int *ps)
 { 
 	floatPOINT nearpoint;
 	floatPOINT homegoalbottom;
-	pstate = ps ;  
+	pstate = ps;
 	which = w;
 	MIDDLE = Physical_Xby2;
 	homegoalbottom.x = (float)globaldata.homegoalbottom.x;
@@ -13,12 +13,6 @@ CGoalieAction::CGoalieAction(int w, int *ps)
 	XHYSTERESIS = 3.0;
 	YHYSTERESIS = 2.0;
 	NEARPOS = nearpoint.x + XHYSTERESIS;
-	float Balldx=globaldata.ballvelS.x;
-	float Balldy=globaldata.ballvelS.y;
-
-
-	BallPos = globaldata.GballposS;
-	Ballspeed = (float)sqrt(Balldx*Balldx + Balldy*Balldy);
 
 	switch(gGoalieActionParameters.GBehaviour)
 	{
@@ -32,9 +26,6 @@ CGoalieAction::CGoalieAction(int w, int *ps)
 		CLEARYOFFSET = Physical_Yby2;
 		break;
 	}
-
-	GAngle = globaldata.goalieangleS;
-
 	GOALIESTANDX = nearpoint.x/2 + 5;// - gGoalieActionParameters.GXcompensation;
 }
 CGoalieAction::~CGoalieAction(){}
@@ -49,9 +40,9 @@ CGoalieAction::~CGoalieAction(){}
 
 BOOL CGoalieAction::S0S1()
 { //---- ball in goal area
-	if ((BallPos.x <= NEARPOS)
-		&& (BallPos.y < (Physical_Yby2 + CLEARYOFFSET)) 
-		&& (BallPos.y > (Physical_Yby2 - CLEARYOFFSET)) )//ball in near
+	if ((globaldata.GballposS.x <= NEARPOS)
+		&& (globaldata.GballposS.y < (Physical_Yby2 + CLEARYOFFSET)) 
+		&& (globaldata.GballposS.y > (Physical_Yby2 - CLEARYOFFSET)) )//ball in near
 		return true;
 	else
 		return false;
@@ -59,7 +50,7 @@ BOOL CGoalieAction::S0S1()
 
 BOOL CGoalieAction::S0S2()
 {//---- ball in middle (outside goal area but inside centre half line)
-	if((!S0S1()) && (BallPos.x < MIDDLE))
+	if((!S0S1()) && (globaldata.GballposS.x < MIDDLE))
 		return true;
 	else
 		return false;
@@ -67,7 +58,7 @@ BOOL CGoalieAction::S0S2()
 
 BOOL CGoalieAction::S0S3()
 {//---- ball moves beyond centre line
-	if(BallPos.x >= MIDDLE)
+	if(globaldata.GballposS.x >= MIDDLE)
 		return true;
 	else
 		return false;
@@ -75,10 +66,10 @@ BOOL CGoalieAction::S0S3()
 
 BOOL CGoalieAction::S1S2()
 {//-- ball moves from goal area to middle
-	if (BallPos.x > NEARPOS + XHYSTERESIS ||
-		(BallPos.x < NEARPOS + XHYSTERESIS &&(
-		(BallPos.y > Physical_Yby2 + CLEARYOFFSET + YHYSTERESIS)
-		|| (BallPos.y < Physical_Yby2 - CLEARYOFFSET - YHYSTERESIS) ) ))
+	if (globaldata.GballposS.x > NEARPOS + XHYSTERESIS ||
+		(globaldata.GballposS.x < NEARPOS + XHYSTERESIS &&(
+		(globaldata.GballposS.y > Physical_Yby2 + CLEARYOFFSET + YHYSTERESIS)
+		|| (globaldata.GballposS.y < Physical_Yby2 - CLEARYOFFSET - YHYSTERESIS) ) ))
 		return true;
 	else
 		return false;
@@ -86,9 +77,9 @@ BOOL CGoalieAction::S1S2()
 
 BOOL CGoalieAction::S2S1()
 {//---- ball moves from middle to goal area
-	if ((BallPos.x <= NEARPOS)
-		&& (BallPos.y < (Physical_Yby2 + CLEARYOFFSET))
-		&& (BallPos.y > (Physical_Yby2 - CLEARYOFFSET)) )//ball in near
+	if ((globaldata.GballposS.x <= NEARPOS)
+		&& (globaldata.GballposS.y < (Physical_Yby2 + CLEARYOFFSET))
+		&& (globaldata.GballposS.y > (Physical_Yby2 - CLEARYOFFSET)) )//ball in near
 		return true;
 	else
 		return false;
@@ -97,7 +88,7 @@ BOOL CGoalieAction::S2S1()
 BOOL CGoalieAction::S2S3()
 {//---- ball moves from middle to far
 
-	if(BallPos.x >= MIDDLE + XHYSTERESIS)
+	if(globaldata.GballposS.x >= MIDDLE + XHYSTERESIS)
 		return true;
 	else
 		return false;
@@ -106,7 +97,7 @@ BOOL CGoalieAction::S2S3()
 BOOL CGoalieAction::S3S2()
 {//---- ball moves from far to middle
 
-	if(BallPos.x <= MIDDLE - XHYSTERESIS)
+	if(globaldata.GballposS.x <= MIDDLE - XHYSTERESIS)
 		return true;
 	else
 		return false;
@@ -120,8 +111,8 @@ void CGoalieAction::S1() //-- clear the ball
 {
 	float FINALVELOCITY = (float)10;
 
-	positionG(BallPos, 90, FINALVELOCITY);
-	avoidBound(which,BallPos);
+	positionG(globaldata.GballposS, 90, FINALVELOCITY);
+	avoidBound(which,globaldata.GballposS);
 	escapeGoal(which);
 	
 }
@@ -163,7 +154,7 @@ void CGoalieAction::S2()	//-- track ball y position + predict shot
 	
 
 	// Predict the final Y position of the ball.
-	finalPos.y = (BallPos.y - ((BallPos.x - finalPos.x)/tan(ballAngle * 3.14159265 / 180.0)));
+	finalPos.y = (globaldata.GballposS.y - ((globaldata.GballposS.x - finalPos.x)/tan(ballAngle * 3.14159265 / 180.0)));
 
 	// Set hard limits for this state
 	if (finalPos.y > Physical_Yby2 + (Physical_Yby2/3.5))
@@ -183,7 +174,7 @@ void CGoalieAction::S3()//----	Follow the ball's current Y position
 {
 	floatPOINT finalPos;
 	finalPos.x = GOALIESTANDX;
-	finalPos.y = BallPos.y;
+	finalPos.y = globaldata.GballposS.y;
 
 	// Hard limits
 	if (finalPos.y > Physical_Yby2 + (Physical_Yby2/3.5))

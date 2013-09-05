@@ -17,13 +17,6 @@ CStrikerAction::CStrikerAction(int w, int *ps)
 	oppgoalbottom.y = (float)globaldata.oppgoalbottom.y;
 	mapxy(&oppgoalbottom, &nearpoint, &globaldata);
 	FARPOS = nearpoint.x;
-	float Balldx=globaldata.ballvelS.x;
-	float Balldy=globaldata.ballvelS.y;
-
-	BallPos = globaldata.GballposS;
-	Ballspeed = (float)sqrt(Balldx*Balldx + Balldy*Balldy);
-
-	GAngle = globaldata.goalieangleS;
 }
 
 //  Switching Conditions/ State Transitions

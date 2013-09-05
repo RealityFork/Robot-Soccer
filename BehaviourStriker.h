@@ -16,16 +16,10 @@ private:
 	float NEARPOS;
 	float XHYSTERESIS;
 	float YHYSTERESIS;
-	float HALF_GOALSIZE;
 	float CLEARYOFFSET;
 	int *pstate;
 	int which; //---- which robot we're referring to
-	floatPOINT BallPos;
-	float Ballspeed;
 	floatPOINT finalPos;
-	floatPOINT GPos;
-	float GAngle;
-	float GOALIESTANDX;
 	float FARPOS;
 	
 public:

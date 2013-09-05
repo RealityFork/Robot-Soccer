@@ -2203,7 +2203,13 @@ void CMyrosot1Dlg::OnGetreadyButton()
 		else
 			MessageBox("LUT not updated..", "LUT ERROR", MB_ICONSTOP);
 	}
-
+	
+	delete globaldata.gBehaviour;
+	delete globaldata.r1Behaviour;
+	delete globaldata.r2Behaviour;
+	pdata->gBehaviour  = new CGoalieAction  (HGOALIE, &(globaldata.GState));
+	pdata->r1Behaviour = new CDefenderAction(HROBOT1, &(globaldata.R1State));
+	pdata->r2Behaviour = new CStrikerAction (HROBOT2, &(globaldata.R2State));
 }	//-- OnGetreadyButton()
 
 

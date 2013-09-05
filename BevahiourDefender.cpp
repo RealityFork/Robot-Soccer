@@ -3,25 +3,9 @@
 
 CDefenderAction::CDefenderAction(int w, int *ps)
 { 
-	floatPOINT nearpoint;
-	floatPOINT homegoalbottom;
-	pstate = ps ;  
 	which = w;
-	MIDDLE = Physical_Xby2;
-	homegoalbottom.x = (float)globaldata.homegoalbottom.x;
-	homegoalbottom.y = (float)globaldata.homegoalbottom.y;
-	mapxy(&homegoalbottom,&nearpoint,&globaldata);
-	XHYSTERESIS = 3.0;
-	YHYSTERESIS = 2.0;
-	NEARPOS = nearpoint.x + XHYSTERESIS;
-	float Balldx=globaldata.ballvelS.x;
-	float Balldy=globaldata.ballvelS.y;
-
-	BallPos = globaldata.GballposS;
-	Ballspeed = (float)sqrt(Balldx*Balldx + Balldy*Balldy);
-
-	GAngle = globaldata.goalieangleS;
-
+	pstate = ps;
+	MIDDLE_X = Physical_Xby2;
 }
 
 //  Switching Conditions/ State Transitions
@@ -32,7 +16,7 @@ CDefenderAction::CDefenderAction(int w, int *ps)
 //	S3S2, S3S1, S3S4
 
 
-BOOL CDefenderAction::S0S1()
+BOOL CDefenderAction::S0S1() // If ball between DEFEND_X and halfway
 {
 	return true;
 }

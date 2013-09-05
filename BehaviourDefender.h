@@ -13,21 +13,9 @@ class CDefenderAction : public RobotBehaviour //----- To defend the goal from at
 {
 
 private:
-	float MIDDLE;
-	float NEARPOS;
-	float XHYSTERESIS;
-	float YHYSTERESIS;
-	float HALF_GOALSIZE;
-	float CLEARYOFFSET;
+	float MIDDLE_X;
 	int *pstate;
 	int which; //---- which robot we're referring to
-	floatPOINT BallPos;
-	float Ballspeed;
-	floatPOINT finalPos;
-	floatPOINT GPos;
-	float GAngle;
-	float GOALIESTANDX;
-
 	
 public:
 	CDefenderAction(int w, int *ps);
