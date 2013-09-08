@@ -1,7 +1,11 @@
 #include "BehaviourStriker.h"
+//#include ""
 
 CStrikerAction::CStrikerAction(int w, int *ps)
 { 
+
+	//variables from goalie action
+	type = STRIKER;
 	floatPOINT nearpoint;
 	floatPOINT homegoalbottom, oppgoalbottom;
 	pstate = ps ;  
@@ -17,6 +21,13 @@ CStrikerAction::CStrikerAction(int w, int *ps)
 	oppgoalbottom.y = (float)globaldata.oppgoalbottom.y;
 	mapxy(&oppgoalbottom, &nearpoint, &globaldata);
 	FARPOS = nearpoint.x;
+	GOALX = nearpoint.x/2 + 5;// - gGoalieActionParameters.GXcompensation;
+
+	oppgoalbottom.x = (float)globaldata.oppgoaltop.x;
+	oppgoalbottom.y = (float)globaldata.oppgoaltop.y;
+	mapxy(&oppgoalbottom, &nearpoint, &globaldata);
+	FARPOS = nearpoint.x;
+
 }
 
 //  Switching Conditions/ State Transitions
@@ -29,6 +40,7 @@ CStrikerAction::CStrikerAction(int w, int *ps)
 
 BOOL CStrikerAction::S0S1()
 {
+	Debug::i("S0S1");
 	return true;
 }
 
@@ -44,53 +56,121 @@ BOOL CStrikerAction::S0S3()
 
 BOOL CStrikerAction::S1S2()
 {
-	return S0S2();
+	if(hasBalls(globaldata.opporobot1posS) || hasBalls(globaldata.opporobot2posS) || hasBalls(globaldata.opporobot3posS) || (globaldata.ballposS.x < MIDDLE && !isInGoal()))
+	{
+		Debug::i("S1S2");
+		return true;
+	}
+	else
+		return false;
 }
 BOOL CStrikerAction::S1S3()
 {
-	return S0S3();
+	if (isInGoal())
+	{
+		Debug::i("S1S3");
+		return true;
+	}
+	else
+		return false; 
 }
 
 BOOL CStrikerAction::S2S1()
 {
-	return S0S1();
+	if (globaldata.ballposS.x > MIDDLE)
+	{
+		Debug::i("S2S1");
+		return true;
+	}
+	else
+		return false;
 }
 
 BOOL CStrikerAction::S2S3()
 {
-	return S0S3();
+	if (isInGoal())
+	{
+		Debug::i("S2S3");
+		return true;
+	}
+	else
+		return false; 
 }
 
 BOOL CStrikerAction::S3S2()
 {
-	return S0S2();
+	if (globaldata.ballposS.x < MIDDLE && !isInGoal())
+	{
+		Debug::i("S3S2");
+		return true;
+	}
+	else
+		return false;
 }
 BOOL CStrikerAction::S3S1()
 {
-	return S0S1();
+	if (globaldata.ballposS.x > MIDDLE)
+	{
+		Debug::i("S3S1");
+		return true;
+	}
+	else
+		return false;
 }
+
+
 
 // Action States
 // S0 initialisation
 //void S0() {}; // No Action for Initialisation State
 
-void CStrikerAction::S1() //-- get ball 
+void CStrikerAction::S1() //-- shooting
 {
+	floatPOINT r1, r2;
+	switch(which)
+	{
+	case HGOALIE:
+		r1 = globaldata.robot1posS;
+		r2 = globaldata.robot2posS;
+		break;
+	case HROBOT1:
+		r1 = globaldata.goalieposS;
+		r2 = globaldata.robot2posS;
+		break;
+	case HROBOT2:
+		r1 = globaldata.goalieposS;
+		r2 = globaldata.robot1posS;
+		break;
+	}
 	floatPOINT goalTarget;
 	goalTarget.x = FARPOS;
 	goalTarget.y = Physical_Yby2;
 
-	myShoot(which, &goalTarget);
+	if (!hasBalls(r1))
+		myShoot(which, &goalTarget);
+	else
+	{
+		floatPOINT pos;
+		//mapxy(&home,&pos,&globaldata);
+		pos.x = MIDDLE;
+		pos.y = globaldata.ballposS.y;
+		position(which, pos, 90, 0);
+	}
+
 }
 
-void CStrikerAction::S2()	//-- tackle
+void CStrikerAction::S2()	//-- chasing
 {	
-	
+	chaseBall(which);
 }
 
-void CStrikerAction::S3()//----	Defend
+void CStrikerAction::S3()//----	Defend/ready
 {
-
+	floatPOINT pos;
+	//mapxy(&home,&pos,&globaldata);
+	pos.x = MIDDLE;
+	pos.y = globaldata.ballposS.y;
+	position(which, pos, 90, 0);
 }
 
 //-- Run function
@@ -132,4 +212,22 @@ void CStrikerAction::runAction()
 		break;
 	}
 	return;
+}
+
+BOOL CStrikerAction::hasBalls(floatPOINT rPos)
+{
+	floatPOINT dist;
+	dist.x = rPos.x - globaldata.ballposS.x;
+	dist.y = rPos.y - globaldata.ballposS.y;
+	if (sqrt(dist.x*dist.x + dist.y*dist.y) < 20)
+		return true;
+	return false;
+}
+
+BOOL CStrikerAction::isInGoal()
+{
+	if ((globaldata.ballposS.x < 20) && (globaldata.ballposS.y > (Physical_Yby2 - (Physical_Yby2/3.5))) && (globaldata.ballposS.y < (Physical_Yby2 + (Physical_Yby2/3.5))))
+		return true;
+	else
+		return false;
 }

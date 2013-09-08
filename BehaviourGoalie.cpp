@@ -2,6 +2,7 @@
 
 CGoalieAction::CGoalieAction(int w, int *ps)
 { 
+	type = GOALIE;
 	floatPOINT nearpoint;
 	floatPOINT homegoalbottom;
 	pstate = ps;
@@ -43,7 +44,10 @@ BOOL CGoalieAction::S0S1()
 	if ((globaldata.GballposS.x <= NEARPOS)
 		&& (globaldata.GballposS.y < (Physical_Yby2 + CLEARYOFFSET)) 
 		&& (globaldata.GballposS.y > (Physical_Yby2 - CLEARYOFFSET)) )//ball in near
+	{
+		Debug::d("Goalie clearing");
 		return true;
+	}
 	else
 		return false;
 }
@@ -51,7 +55,10 @@ BOOL CGoalieAction::S0S1()
 BOOL CGoalieAction::S0S2()
 {//---- ball in middle (outside goal area but inside centre half line)
 	if((!S0S1()) && (globaldata.GballposS.x < MIDDLE))
+	{
+		Debug::d("Goalie predicting");
 		return true;
+	}
 	else
 		return false;
 }
@@ -59,7 +66,10 @@ BOOL CGoalieAction::S0S2()
 BOOL CGoalieAction::S0S3()
 {//---- ball moves beyond centre line
 	if(globaldata.GballposS.x >= MIDDLE)
+	{
+		Debug::d("Goalie tracking");
 		return true;
+	}
 	else
 		return false;
 }
@@ -70,7 +80,10 @@ BOOL CGoalieAction::S1S2()
 		(globaldata.GballposS.x < NEARPOS + XHYSTERESIS &&(
 		(globaldata.GballposS.y > Physical_Yby2 + CLEARYOFFSET + YHYSTERESIS)
 		|| (globaldata.GballposS.y < Physical_Yby2 - CLEARYOFFSET - YHYSTERESIS) ) ))
+	{
+		Debug::d("Goalie predicting");
 		return true;
+	}
 	else
 		return false;
 }
@@ -80,7 +93,10 @@ BOOL CGoalieAction::S2S1()
 	if ((globaldata.GballposS.x <= NEARPOS)
 		&& (globaldata.GballposS.y < (Physical_Yby2 + CLEARYOFFSET))
 		&& (globaldata.GballposS.y > (Physical_Yby2 - CLEARYOFFSET)) )//ball in near
+	{
+		Debug::d("Goalie clearing");
 		return true;
+	}
 	else
 		return false;
 }
@@ -89,7 +105,10 @@ BOOL CGoalieAction::S2S3()
 {//---- ball moves from middle to far
 
 	if(globaldata.GballposS.x >= MIDDLE + XHYSTERESIS)
+	{
+		Debug::d("Goalie tracking");
 		return true;
+	}
 	else
 		return false;
 }
@@ -98,7 +117,10 @@ BOOL CGoalieAction::S3S2()
 {//---- ball moves from far to middle
 
 	if(globaldata.GballposS.x <= MIDDLE - XHYSTERESIS)
+	{
+		Debug::d("Goalie predicting");
 		return true;
+	}
 	else
 		return false;
 }
@@ -111,7 +133,7 @@ void CGoalieAction::S1() //-- clear the ball
 {
 	float FINALVELOCITY = (float)10;
 
-	positionG(globaldata.GballposS, 90, FINALVELOCITY);
+	position(which, globaldata.GballposS, 90, FINALVELOCITY);
 	avoidBound(which,globaldata.GballposS);
 	escapeGoal(which);
 	
@@ -123,8 +145,17 @@ void CGoalieAction::S2()	//-- track ball y position + predict shot
 	finalPos.x = GOALIESTANDX;
 
 	// Take a ball velocity sample
-	globaldata.ballVelSamples[globaldata.ballVelIndex].x = globaldata.ballvel.x;
-	globaldata.ballVelSamples[globaldata.ballVelIndex].y = globaldata.ballvel.y;
+
+	if (globaldata.game_area == RIGHT_AREA)
+	{
+		globaldata.ballVelSamples[globaldata.ballVelIndex].x = -globaldata.ballvel.x;
+		globaldata.ballVelSamples[globaldata.ballVelIndex].y = -globaldata.ballvel.y;
+	}
+	else
+	{
+		globaldata.ballVelSamples[globaldata.ballVelIndex].x = globaldata.ballvel.x;
+		globaldata.ballVelSamples[globaldata.ballVelIndex].y = globaldata.ballvel.y;
+	}
 	globaldata.ballAngleAve = globaldata.ballVelIndex;
 
 	globaldata.ballVelIndex = (globaldata.ballVelIndex+1) % ballVelNSamples;
@@ -150,7 +181,7 @@ void CGoalieAction::S2()	//-- track ball y position + predict shot
 	else if(ballAngleActual < -90)//-90 to -180
 		ballAngle = ballAngleActual + 90;
 	else //0 to -90
-	ballAngle = 90;
+		ballAngle = 90;
 	
 
 	// Predict the final Y position of the ball.
@@ -165,7 +196,7 @@ void CGoalieAction::S2()	//-- track ball y position + predict shot
 	// Convert predicted co ords back to screen co ords for display:
 	inversemapxy(&globaldata.predicted,&finalPos,&globaldata);
 
-	positionG(finalPos, 90, 0);
+	position(which, finalPos, 90, 0);
 	avoidBound(which,finalPos);
 	escapeGoal(which);
 }
@@ -184,7 +215,7 @@ void CGoalieAction::S3()//----	Follow the ball's current Y position
 
 	globaldata.predicted = finalPos;
 
-	positionG(finalPos, 90, 0);
+	position(which, finalPos, 90, 0);
 	avoidBound(which,finalPos);
 	escapeGoal(which);
 }

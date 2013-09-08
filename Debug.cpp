@@ -50,5 +50,4 @@ void Debug::appendEdit(CString s)
 	int end = globaldata.debugDlg->m_debugEdit.GetWindowTextLength();
 	globaldata.debugDlg->m_debugEdit.SetSel(end, end);
 	globaldata.debugDlg->m_debugEdit.ReplaceSel(s);
-	globaldata.debugDlg->UpdateData(FALSE);
 }

@@ -454,99 +454,249 @@ void placeRobots()
 }	//-- placeRobots()
 
 
-void myShoot(int which, floatPOINT *targetPos)
+void myShoot(int which, floatPOINT *ptargetPos)
 {
-	floatPOINT target = *targetPos;
-	
-	float maxAngleError = 80;
-	
-	int d= 0; 
-	float robotAngle, dx, dy, dx1, dy1, angle1, angle2, angle3, angleError, Vl, Vr;
-	floatPOINT robotVel, robotPos, ballPos;
+	float		targetAngle, ballAngle, robotAngle, dx, dy, distanceError, ballTargetAngle;
+	floatPOINT	RobotBallvector, BallTargetvector, robotPos, robotVel, ballPos, targetPos, desiredPos, ballVel;
 
-	float Ka = 0.4; //MIGHT NEED ADJUSTING
-	float speed = 20;//MIGHT NEED ADJUSTING
 
 	ballPos = globaldata.ballposS;
-	
+	ballVel = globaldata.ballvelS;
+
+	targetPos = *ptargetPos;
+
 	switch(which)
 	{
-	case HGOALIE:
-			robotAngle = globaldata.goalieangleS;
-			robotPos = globaldata.goalieposS;
-			//robotVel = globaldata.goalievelS;
-			break;
-	case HROBOT1:
-			robotAngle = globaldata.robot1angleS;
-			robotPos = globaldata.robot1posS;
-			//robotVel = globaldata.robot1velS;
-			break;
-	case HROBOT2:	
-			robotAngle = globaldata.robot2angleS;
-			robotPos = globaldata.robot2posS;
-			//robotVel = globaldata.robot2velS;
-			break;
+	case HGOALIE	:	robotAngle = globaldata.goalieangleS;
+						robotPos = globaldata.goalieposS;
+						robotVel = globaldata.goalievelS;
+						break;
+	case HROBOT1	:	robotAngle = globaldata.robot1angleS;
+						robotPos = globaldata.robot1posS;
+						robotVel = globaldata.robot1velS;
+						break;
+	case HROBOT2	:	robotAngle = globaldata.robot2angleS;
+						robotPos = globaldata.robot2posS;
+						robotVel = globaldata.robot2velS;
+						break;
 	}	//-- end of switch
+
+	if (robotAngle > 90)
+			robotAngle -= 180;
+	if (robotAngle < -90)
+			robotAngle += 180;
 	
-	dx = fabs(target.x - ballPos.x);
-	dy =  ballPos.y - target.y; //??
+	dx = ballPos.x - robotPos.x;
+	dy = ballPos.y - robotPos.y;
+	RobotBallvector.x = dx;
+	RobotBallvector.y = dy;
 
-	dx1 = fabs(ballPos.x - robotPos.x);
-	dy1 = ballPos.y - robotPos.y; //??
+	distanceError = (float)sqrt(dx*dx+dy*dy);
 
-	angle1 = atan2(dy1,dx1)*(180/PI);
-	angle2 = atan2(dy,dx)*(180/PI);
+	BallTargetvector.x = targetPos.x - ballPos.x;
+	BallTargetvector.y = targetPos.y - ballPos.y;
 
-	angle3 = 2*angle2 - angle1;
-	
-	if (angle3 > 180)		//-- normalisation for -180 to +180
-		angle3 -= 360;
-	else if (angle3 < -180)
-		angle3 += 360;
-
-	angleError = angle3 - robotAngle;
-
-	if (angleError > 180)		//-- normalisation for -180 to +180
-		angleError -= 360;
-	else if (angleError < -180)
-		angleError += 360;
-
-	if (-maxAngleError < angleError && angleError < maxAngleError)
-		d = 1;
+	if(BallTargetvector.x == 0 && BallTargetvector.y == 0)
+		targetAngle = 0;
 	else
-		if ((180 >= angleError && angleError > 180-maxAngleError) ||
-		(-180 < angleError && angleError <= -180+maxAngleError) )
+		targetAngle = (float)(atan2((double) BallTargetvector.y, (double) BallTargetvector.x)*180/PI);
+
+	if(RobotBallvector.x == 0 && RobotBallvector.y == 0)
+		ballAngle = targetAngle;
+	else
+		ballAngle = (float)(atan2((double) RobotBallvector.y, (double) RobotBallvector.x)*180/PI);
+	ballTargetAngle = ballAngle - targetAngle;
+	while(ballTargetAngle>180) ballTargetAngle-=360;
+	while(ballTargetAngle<-180) ballTargetAngle+=360;
+
+	float offset = 14;
+	if (robotPos.x > ballPos.x)//If on wrong side then boost it to get on the other side
+		offset = 30;
+
+	desiredPos.x = (float) (ballPos.x + ballVel.x*2 - offset * cos(targetAngle*PI/180));
+	desiredPos.y = (float) (ballPos.y + ballVel.y*2 - offset * sin(targetAngle*PI/180));
+
+	//-- limit desiredPos
+	if (desiredPos.x < 0)
+		desiredPos.x = 0;
+	if (desiredPos.x > (Physical_X))
+		desiredPos.x = (Physical_X);
+	if (desiredPos.y < 4)
+		desiredPos.y = 4;
+	if (desiredPos.y > (Physical_Y-4))
+		desiredPos.y = (Physical_Y-4);
+
+
+		//Lined up for shot?
+		if ((ballTargetAngle <= 45 && ballTargetAngle >= -45) && distanceError < 18)
 		{
-			if (angleError < -90) //-- switch robot's front direction
+
+			if (robotAngle <= targetAngle + 15 && //Might want to change these
+				robotAngle >= targetAngle - 15)
 			{
-				angleError += 180;
-				d = -1;
+				//SHOOT!!!!
+				//position(which, ballPos, targetAngle, 50.0);
+				position(which, targetPos, targetAngle, 50.0);
+				Debug::i("Shoot!");
 			}
 			else
-			if (angleError > 90)
 			{
-				angleError -= 180;
-				d = -1;
+				angle(which, targetAngle);
+				//Debug::i("Adjusting angle");
 			}
 		}
 		else
-			d = 0;
+				//-- need to get into position
+		{
+			//Debug::i("Positioning");
+				//-- robot behind the ball?
+				if ( robotPos.x < (ballPos.x) )
+				{
+					//line up shot
+					position(which, desiredPos, targetAngle, 3.0);
+				}
+				else	
+				{
+					//Need to stop the robot from hitting the ball from the wrong side.
+					if(desiredPos.x < (ballPos.x + 10) && desiredPos.x > (ballPos.x - 10))
+					{
+						//desiredpos tooo close
+					}
+					else{
+			
+						if ((ballPos.y - robotPos.y) >= 0)
+						{
+							if(desiredPos.y > (ballPos.y - 10))
+								desiredPos.y = ballPos.y - 10;
+							if (desiredPos.y < 4)
+								desiredPos.y = 4;
+							
+						}
+						else
+						{
+							if(desiredPos.y < (ballPos.y + 10))
+								desiredPos.y = ballPos.y + 10;
+							if (desiredPos.y > (Physical_Y-4))
+								desiredPos.y = (Physical_Y-4);
+						}
+
+						//if(desiredPos.x > (ballPos.x - 10))
+						//		desiredPos.x = ballPos.x - 10;
+					}
+					position(which, desiredPos, targetAngle, 2.0);
 
 
-	if(d==0)
-		angle(which, angle3);
-	else{
+				}
+		}
 
-		Vl = d*speed - Ka*angleError;
-		Vr = d*speed + Ka*angleError;
+	return;
+}	//-- myShoot() LATEST MY SHOOT FROM ELLIOT
 
-		velocity(which, Vl, Vr);
-	}
-}
 
-void myTackle()
+// =========================================================================
+// SOME STUFF I HAVE BEEN WORKING ON
+// FEEL FREE TO CHANGE ANYTHING
+void myTackle(int which)
 {
+	testMyShoot(which);
+//	chaseBall(which);
 }
+
+// Chase the ball
+void chaseBall(int which)
+{
+	floatPOINT	finalPos;
+	float		finalAngle;
+	float		finalVel;
+
+	finalPos = globaldata.ballposS;
+	finalAngle = 0;
+	finalVel = 0;
+
+	position(which, finalPos, finalAngle, finalVel);
+	avoidBound(which, finalPos);
+	avoidGoalAreas(which, finalPos);
+}
+
+// Test MyShoot Function
+void testMyShoot(int which){
+	floatPOINT	oppgoalbottom;
+	float		FARPOS;
+	floatPOINT	finalPos;
+	float		finalAngle;
+	float		finalVel;
+	floatPOINT	nearpoint;
+	
+	oppgoalbottom.x = (float)globaldata.oppgoalbottom.x;
+	oppgoalbottom.y = (float)globaldata.oppgoalbottom.y;
+	mapxy(&oppgoalbottom, &nearpoint, &globaldata);
+	FARPOS = nearpoint.x;
+
+	finalPos.x = FARPOS;
+	finalPos.y = Physical_Yby2;
+
+	myShoot(which, &finalPos);
+	//position(which, finalPos, 0, 0);
+
+//	avoidBound(which, finalPos);
+//	avoidGoalAreas(which, finalPos);
+}
+
+// =========================================================================
+
+
+void switchRobots(RobotBehaviour* b1, RobotBehaviour* b2)
+{
+	int w1 = b1->which;
+	b1->switchTo(b2->which);
+	b2->switchTo(w1);
+}
+
+void switchRobotsIfCan()
+{
+	//-- Switch for faster defence --//
+	floatPOINT dPos = getPos(DEFENDER);
+	floatPOINT sPos = getPos(STRIKER);
+
+	// Switch if both robots are in the wrong half,
+	// And the defender is further away than the striker
+	if (globaldata.ballposS.x < Physical_Xby2 &&
+		dPos.x > Physical_Xby2 && sPos.x > Physical_Xby2 &&
+		dPos.x > sPos.x)
+	{
+		Debug::i("Switching striker and defender");
+		switchRobots(globaldata.dBehaviour, globaldata.sBehaviour);
+	}
+	//-------------------------------//
+
+
+	floatPOINT gPos = getPos(GOALIE);
+	floatPOINT home, h;
+	home.x = (float)globaldata.homegoalbottom.x;
+	home.y = (float)globaldata.homegoalbottom.y;
+	mapxy(&home, &h, &globaldata);
+
+	//-- Switch if Str/Def is closer to goal than goalie --//
+	float dDist = sqrt(pow(h.x-dPos.x, 2) + pow(Physical_Yby2-dPos.y, 2));
+	float sDist = sqrt(pow(h.x-sPos.x, 2) + pow(Physical_Yby2-sPos.y, 2));
+	float gDist = sqrt(pow(h.x-gPos.x, 2) + pow(Physical_Yby2-gPos.y, 2));
+
+	if (dDist < gDist && dDist < sDist) // Switch defender and goalie
+	{
+		CString lol = "";
+		lol.Format("%f, %f", h.x, gDist);
+		Debug::i("Switching goalie and defender");
+		Debug::i(lol);
+		switchRobots(globaldata.gBehaviour, globaldata.dBehaviour);
+	}
+	else if (sDist < gDist && sDist < dDist) // Switch striker and goalie
+	{
+		Debug::i("Switching goalie and striker");
+		switchRobots(globaldata.gBehaviour, globaldata.sBehaviour);
+	}
+	//-----------------------------------------------------//
+}
+
 
 ////////////////////////////////////////////////////
 void myStrategy()
@@ -584,15 +734,7 @@ void myStrategy()
 	case 0 :
 	//-- STRIKER TO CHASE THE BALL --------------------------------
 
-	finalPos = globaldata.ballposS;
-	finalAngle = 0;
-	finalVel = 0;
-//	which = HGOALIE;	//-- goalie
-//	which = HROBOT1;	//-- defender
-	which = HROBOT2;	//-- striker
-	position(which, finalPos, finalAngle, finalVel);
-	avoidBound(which, finalPos);
-	avoidGoalAreas(which, finalPos);
+	chaseBall(HROBOT1);
 
   //-----------------------------------------------------
 	break;
@@ -600,7 +742,7 @@ void myStrategy()
 	case 1 :
 	//-- TO MAKE THE GOALIE'S ANGLE 90 DEGREES ---------------
 	desiredAngle = 90;
-	angleG(desiredAngle);
+	angleG(which, desiredAngle);
 	//-----------------------------------------------------
 	break;
 
@@ -617,7 +759,7 @@ void myStrategy()
 
 	finalAngle = 0;
 	finalVel = 0;
-	which = HROBOT2;
+	which = HROBOT1;
 
 	position(which, finalPos, finalAngle, finalVel);
 	avoidBound(which, finalPos);
@@ -626,15 +768,18 @@ void myStrategy()
 	break;
 
 	case 3 :	//Test myShoot()
-
+		
+		testMyShoot(HROBOT1);
+		
+		/*
 		oppgoalbottom.x = (float)globaldata.oppgoalbottom.x;
 		oppgoalbottom.y = (float)globaldata.oppgoalbottom.y;
 		mapxy(&oppgoalbottom, &nearpoint, &globaldata);
 		FARPOS = nearpoint.x;
 
 		//	which = HGOALIE;	//-- goalie
-		//	which = HROBOT1;	//-- defender
-		which = HROBOT2;	//-- striker
+			which = HROBOT1;	//-- defender
+		// which = HROBOT2;	//-- striker
 
 		finalPos.x = FARPOS;
 		finalPos.y = Physical_Yby2;
@@ -644,10 +789,13 @@ void myStrategy()
 
 		//avoidBound(which, finalPos);
 		//avoidGoalAreas(which, finalPos);
+		*/
 		
 		break;
 
-	case 4 :	break;
+	case 4 :
+		globaldata.dBehaviour->runAction();
+		break;
 
 	case 5 :	break;
 
@@ -667,8 +815,8 @@ void myStrategy()
 			//-- insert code here to play the game
 		{
 		globaldata.gBehaviour->runAction();
-		globaldata.r1Behaviour->runAction();
-		globaldata.r2Behaviour->runAction();
+		globaldata.dBehaviour->runAction();
+		globaldata.sBehaviour->runAction();
 		}
 
 		break;
@@ -681,6 +829,39 @@ void myStrategy()
 
 	}	//-- end of switch statement
 
+	switchRobotsIfCan();
+
 	return;
 }	//-- myStrategy()
 
+floatPOINT getPos(BehaviourType t)
+{
+	RobotBehaviour* b;
+	floatPOINT pos;
+	switch(t)
+	{
+	case GOALIE:
+		b = globaldata.gBehaviour;
+		break;
+	case DEFENDER:
+		b = globaldata.dBehaviour;
+		break;
+	case STRIKER:
+		b = globaldata.sBehaviour;
+		break;
+	}
+
+	switch (b->which)
+	{
+	case HGOALIE:
+		pos = globaldata.goalieposS;
+		break;
+	case HROBOT1:
+		pos = globaldata.robot1posS;
+		break;
+	case HROBOT2:
+		pos = globaldata.robot2posS;
+		break;
+	}
+	return pos;
+}

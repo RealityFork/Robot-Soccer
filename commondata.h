@@ -21,6 +21,7 @@ enum whosePossession {HOME, OPPONENT};
 enum whichQuadrant {TOPLEFT, TOPRIGHT, BOTTOMLEFT, BOTTOMRIGHT};
 //------------------------------------------------------------------
 enum FieldType {ODD,EVEN};
+enum BehaviourType {GOALIE, DEFENDER, STRIKER};
 //-- 20 x 20 window around the capture point will be zoomed
 #define CAPSIZE	10
 #define MAXROBOTS 3
@@ -188,10 +189,9 @@ struct commondata
 						//-- the capture window for zooming
 
 	//-- behaviour state for individual robots
-	int GState;		//-- for goal keeper behaviour
-
-	int R1State;	//-- for defender behaviour
-	int R2State;	//-- for striker behaviour
+	int GState;	//-- for goal keeper behaviour
+	int DState;	//-- for defender behaviour
+	int SState;	//-- for striker behaviour
 
 	//-- state for position robots action in CPlaceRobots
 	int PositionState;
@@ -230,9 +230,11 @@ struct commondata
 
 	// These are used to maintain the same instances
 	// Instantiated at the bottom of CMyrosot1Dlg::OnInitDialog()
+	// These express the BEHAVIOURS being implemented. NOT the physical robots
 	RobotBehaviour *gBehaviour;
-	RobotBehaviour *r1Behaviour;
-	RobotBehaviour *r2Behaviour;
+	RobotBehaviour *dBehaviour;
+	RobotBehaviour *sBehaviour;
+
 	DebugDlg *debugDlg;
 
 };	//-- end of structure commondata

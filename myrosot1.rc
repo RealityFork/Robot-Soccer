@@ -90,7 +90,7 @@ IDD_MYROSOT1_DIALOG DIALOGEX 0, 0, 503, 354
 STYLE WS_POPUP
 EXSTYLE WS_EX_APPWINDOW
 MENU IDR_MAINFRAME
-FONT 8, "Arial"
+FONT 8, "Arial", 0, 0, 0x1
 BEGIN
     LTEXT           "Capture Window",IDC_STATIC,7,137,33,18,0,
                     WS_EX_CLIENTEDGE
@@ -573,8 +573,8 @@ BEGIN
                     BS_AUTORADIOBUTTON,17,58,107,8
     CONTROL         "Test myShoot()",IDC_RADIO_CASE3,"Button",
                     BS_AUTORADIOBUTTON,17,69,89,8
-    CONTROL         "---- 4",IDC_RADIO_CASE4,"Button",BS_AUTORADIOBUTTON,17,
-                    80,89,8
+    CONTROL         "State-Based Defender action",IDC_RADIO_CASE4,"Button",
+                    BS_AUTORADIOBUTTON,17,80,89,8
     CONTROL         "---- 5",IDC_RADIO_CASE5,"Button",BS_AUTORADIOBUTTON,17,
                     91,89,8
     CONTROL         "---- 6",IDC_RADIO_CASE6,"Button",BS_AUTORADIOBUTTON,126,

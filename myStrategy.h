@@ -28,6 +28,11 @@ void myStrategy(void);
 void placeRobots(void);
 
 void myShoot(int which, floatPOINT *targetPos);
-void myTackle();
+void myTackle(int which);
+void chaseBall(int which);
+void clearBall(int which);
+void testMyShoot(int which);
+void switchRobotsIfCan();
+floatPOINT getPos(BehaviourType);
 
 #endif

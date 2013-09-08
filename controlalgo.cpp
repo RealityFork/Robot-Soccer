@@ -141,7 +141,7 @@ void angle(int which, float desiredAngle)
 }	//-- angle()
 
 //-- angle() function exclusively for Goalie to make it nippier
-void angleG(float desiredAngle)
+void angleG(int which, float desiredAngle)
 {
 	float robotAngle;
 	float angleError;
@@ -261,8 +261,6 @@ void angleG(float desiredAngle)
 
 	return;
 }	//-- angleG()
-
-
 
 
 
@@ -396,11 +394,11 @@ void position(int which, floatPOINT finalPos, float finalAngle, float finalVel)
 
 
 //-- position() function exclusively for Goalie -------------------
-void positionG(floatPOINT finalPos, float finalAngle, float finalVel)
+/*void positionG(floatPOINT finalPos, float finalAngle, float finalVel)
 {
 	position(HGOALIE, finalPos, finalAngle, finalVel);
 	return;
-}	//-- positionG()
+}*/	//-- positionG()
 
 
 void velocity(int which, int Vl, int Vr)
@@ -511,10 +509,7 @@ void escapeGoal(int which)
 		floatPOINT goaliePos;
 		goaliePos.x = (float) G_OFFSET - gGoalieActionParameters.GXcompensation;  //-- G_OFFSET is 7.5 cms
 		goaliePos.y = Physical_Yby2;
-		if (which == HGOALIE)
-			positionG(goaliePos, 90, 0);
-		else
-			position(which, goaliePos, 90, 0);
+		position(which, goaliePos, 90, 0);
 	}
 	else //-- robotPos.x >= 3.0
 	{
@@ -832,10 +827,7 @@ void avoidGoalAreas(int which, floatPOINT finalPos)
 		else
 			movePos = finalPos;
 
-		if (which == HGOALIE)
-			positionG(movePos, 90, 0);
-		else
-			position(which, movePos, 90, 0);
+		position(which, movePos, 90, 0);
 	}
 
 	//----- Opponent's goal area -------------------------------------

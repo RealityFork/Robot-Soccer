@@ -77,11 +77,13 @@ CMyrosot1Dlg::CMyrosot1Dlg(CWnd* pParent /*=NULL*/)
 {
 	//{{AFX_DATA_INIT(CMyrosot1Dlg)
 
-	m_AdjColDlg = new CAdjColDlg(this);
-	m_RFCommDlg = new CRFCommDlg(this);
-	m_ParametersDlg = new CParameters(this);
+	m_AdjColDlg =          new CAdjColDlg(this);
+	m_RFCommDlg =          new CRFCommDlg(this);
+	m_ParametersDlg =      new CParameters(this);
 	m_GrabberSettingsDlg = new CGrabberSettingsDlg(this);
-	m_TuningDlg = new CTuningDlg(this);
+	m_TuningDlg =          new CTuningDlg(this);
+	m_AdjGameAreaDlg =     new CAdjGameArea(this);
+	m_debugDlg =           new DebugDlg(this);
 
 	m_SetBoundary = -1;
 	m_Red = 0;
@@ -318,7 +320,6 @@ BOOL FBUSINSTALLED;	//-- is the Vision Card installed?
 BOOL CMyrosot1Dlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
-	m_debugDlg = new DebugDlg(this);
 	m_debugDlg->Create(IDD_DEBUGDLG, this);
 	m_debugDlg->ShowWindow(SW_SHOW);
 	
@@ -534,8 +535,8 @@ BOOL CMyrosot1Dlg::OnInitDialog()
 
 	//-- Initialise the action states
 	pdata->GState = 0;
-	pdata->R1State = 0;
-	pdata->R2State = 0;
+	pdata->DState = 0;
+	pdata->SState = 0;
 
 	//---- PositionState initialisation
 	pdata->PositionState = 2;		//-- Idle state is 2
@@ -596,11 +597,11 @@ BOOL CMyrosot1Dlg::OnInitDialog()
 	SetWindowPos(NULL, 0, 0, ScreenX, ScreenY, SWP_SHOWWINDOW);
 
 	//---- Set default video levels ---------------
-	FBus.brightness = 34;
-	FBus.contrast = 35;
-	FBus.saturation = 32;
+	FBus.brightness = 50;
+	FBus.contrast = 50;
+	FBus.saturation = 50;
 	FBus.hue = 0;
-	FBus.sharpness = 7;
+	FBus.sharpness = 1;
 
 	//-------  Define Video Standard and Type -------
 	FBus.wStandard	= STANDARD_NTSC;
@@ -623,7 +624,7 @@ BOOL CMyrosot1Dlg::OnInitDialog()
 		char szarDef[MAXSTRING];
 
 		//-- Get Default video levels from FBG.INI if we have one
-		wsprintf(szarDef,"%d", FBus.brightness);
+		/*wsprintf(szarDef,"%d", FBus.brightness);
 		FB_GetPrivateProfileString("VideoInput", "Brightness", szarDef, szarVal, MAXSTRING, INIFile);
 		FBus.brightness=atoi(szarVal);
 
@@ -642,7 +643,7 @@ BOOL CMyrosot1Dlg::OnInitDialog()
 		wsprintf(szarDef,"%d", FBus.sharpness);
 		FB_GetPrivateProfileString("VideoInput", "Sharpness", szarDef, szarVal, MAXSTRING, INIFile);
 		FBus.sharpness=atoi(szarVal);
-
+		*/
 		//-- Do the Video Adjustments -----------
 		FB_SetVideoAdjustments(ADJUST_BRIGHTNESS, (SHORT)FBus.brightness);
 		FB_SetVideoAdjustments(ADJUST_CONTRAST, (SHORT)FBus.contrast);
@@ -710,8 +711,8 @@ BOOL CMyrosot1Dlg::OnInitDialog()
 
 	// Behaviour instances
 	pdata->gBehaviour  = new CGoalieAction  (HGOALIE, &(globaldata.GState));
-	pdata->r1Behaviour = new CDefenderAction(HROBOT1, &(globaldata.R1State));
-	pdata->r2Behaviour = new CStrikerAction (HROBOT2, &(globaldata.R2State));
+	pdata->dBehaviour = new CDefenderAction (HROBOT1, &(globaldata.DState));
+	pdata->sBehaviour = new CStrikerAction  (HROBOT2, &(globaldata.SState));
 
 	return TRUE;
 }
@@ -1926,8 +1927,8 @@ void CMyrosot1Dlg::OnGetreadyButton()
 			
 			//-- Initialise the action states
 			pdata->GState = 0;
-			pdata->R1State = 0;
-			pdata->R2State = 0;
+			pdata->DState = 0;
+			pdata->SState = 0;
 
 			//---- PositionState initialisation
 			pdata->PositionState = 2;		//-- Idle state is 2
@@ -1941,9 +1942,10 @@ void CMyrosot1Dlg::OnGetreadyButton()
 			mapxy(&ScreenImageCentre, &(pdata->PhysicalImageCentre), pdata);
 
 			//-- pdata->fullFrame is TRUE at this point
-			if(pdata->fullFrame)
+			if(pdata->fullFrame){
 				fullTracking(pdata, FROMGETREADY);
-			mapall(pdata);
+				mapall(pdata);
+			}
 			//-- transfer the starting ball position
 			pdata->StartBallPosS = pdata->ballposS;
 
@@ -2208,14 +2210,14 @@ void CMyrosot1Dlg::OnGetreadyButton()
 			MessageBox("LUT not updated..", "LUT ERROR", MB_ICONSTOP);
 	}
 	//-- Calculate strategy variables
-	mapall(pdata);
+	//mapall(pdata);
 
 	delete globaldata.gBehaviour;
-	delete globaldata.r1Behaviour;
-	delete globaldata.r2Behaviour;
+	delete globaldata.dBehaviour;
+	delete globaldata.sBehaviour;
 	pdata->gBehaviour  = new CGoalieAction  (HGOALIE, &(globaldata.GState));
-	pdata->r1Behaviour = new CDefenderAction(HROBOT1, &(globaldata.R1State));
-	pdata->r2Behaviour = new CStrikerAction (HROBOT2, &(globaldata.R2State));
+	pdata->dBehaviour = new CDefenderAction(HROBOT1, &(globaldata.DState));
+	pdata->sBehaviour = new CStrikerAction (HROBOT2, &(globaldata.SState));
 }	//-- OnGetreadyButton()
 
 

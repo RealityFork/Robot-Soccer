@@ -12,36 +12,37 @@ Class1=CMyrosot1App
 Class2=CMyrosot1Dlg
 Class3=CAboutDlg
 
-ResourceCount=21
-Resource1=IDD_TESTING_DIALOG
-Resource2=IDD_GRABBERSETTINGS_DIALOG
+ResourceCount=22
+Resource1=IDD_ABOUTBOX
+Resource2=IDD_DEBUGDLG (English (New Zealand))
 Resource3=IDD_GRABBERSETTINGS_DIALOG (English (U.S.))
 Class4=CAdjColDlg
-Resource4=IDD_ADJUSTGAMEAREA_DIALOG
+Resource4=IDD_GRABBERSETTINGS_DIALOG
 Class5=CRFCommDlg
 Resource5=IDD_ADJUSTCOLOURS_DIALOG
 Class6=CParameters
-Resource6=IDD_ABOUTBOX
+Resource6=IDD_MYROSOT1_DIALOG
 Class7=CAdjGameArea
 Resource7=IDD_ADJUSTGAMEAREA_DIALOG (English (U.S.))
 Class8=CGrabberSettingsDlg
 Resource8=IDD_ADJUSTCOLOURS_DIALOG (English (U.S.))
 Class9=CTuningDlg
-Resource9=IDD_RFCOMM_DIALOG
+Resource9=IDD_ADJUSTGAMEAREA_DIALOG
 Class10=CTestingDlg
-Resource10=IDD_PARAMETERS_DIALOG
+Resource10=IDD_TUNING_DIALOG
 Resource11=IDD_DEBUGDLG
-Resource12=IDR_MAINFRAME
-Resource13=IDD_TUNING_DIALOG
+Resource12=IDD_RFCOMM_DIALOG
+Resource13=IDD_PARAMETERS_DIALOG
 Resource14=IDD_TESTING_DIALOG (English (U.S.))
 Resource15=IDD_TUNING_DIALOG (English (U.S.))
 Resource16=IDD_ABOUTBOX (English (U.S.))
-Resource17=IDD_MYROSOT1_DIALOG
+Resource17=IDR_MAINFRAME (English (U.S.))
 Resource18=IDD_PARAMETERS_DIALOG (English (U.S.))
 Resource19=IDD_RFCOMM_DIALOG (English (U.S.))
 Resource20=IDD_MYROSOT1_DIALOG (English (U.S.))
 Class11=DebugDlg
-Resource21=IDR_MAINFRAME (English (U.S.))
+Resource21=IDD_TESTING_DIALOG
+Resource22=IDR_MAINFRAME
 
 [CLS:CMyrosot1App]
 Type=0
@@ -947,6 +948,16 @@ VirtualFilter=dWC
 [DLG:IDD_DEBUGDLG]
 Type=1
 Class=DebugDlg
+ControlCount=5
+Control1=checkDebug,button,1342242819
+Control2=checkInfo,button,1342242819
+Control3=checkWarning,button,1342242819
+Control4=checkError,button,1342242819
+Control5=debugEdit,edit,1352728772
+
+[DLG:IDD_DEBUGDLG (English (New Zealand))]
+Type=1
+Class=?
 ControlCount=5
 Control1=checkDebug,button,1342242819
 Control2=checkInfo,button,1342242819

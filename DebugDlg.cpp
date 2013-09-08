@@ -41,9 +41,17 @@ void DebugDlg::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(DebugDlg, CDialog)
 	//{{AFX_MSG_MAP(DebugDlg)
-		// NOTE: the ClassWizard will add message map macros here
+	ON_BN_CLICKED(checkDebug, OncheckDebug)
+	ON_BN_CLICKED(checkInfo, OncheckInfo)
+	ON_BN_CLICKED(checkWarning, OncheckWarning)
+	ON_BN_CLICKED(checkError, OncheckError)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
 // DebugDlg message handlers
+
+void DebugDlg::OncheckDebug()  {m_checkDebug   = !m_checkDebug;}
+void DebugDlg::OncheckInfo()   {m_checkInfo    = !m_checkInfo;}
+void DebugDlg::OncheckWarning(){m_checkWarning = !m_checkWarning;}
+void DebugDlg::OncheckError()  {m_checkError   = !m_checkError;}

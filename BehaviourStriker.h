@@ -8,6 +8,7 @@
 #include "map.h"
 #include "math.h"
 #include "BehaviourRobot.h"
+#include "Debug.h"
 
 class CStrikerAction : public RobotBehaviour //----- To attack
 {
@@ -17,13 +18,16 @@ private:
 	float XHYSTERESIS;
 	float YHYSTERESIS;
 	float CLEARYOFFSET;
-	int *pstate;
-	int which; //---- which robot we're referring to
 	floatPOINT finalPos;
 	float FARPOS;
+	float STRIKERSTANDX;
+	float GOALX;
 	
+	BOOL hasBalls(floatPOINT);
+	BOOL isInGoal();
+
 public:
-	CStrikerAction(int w, int *ps);
+	CStrikerAction(int, int*);
 	~CStrikerAction(){};
 
 //  Switching Conditions/ State Transitions

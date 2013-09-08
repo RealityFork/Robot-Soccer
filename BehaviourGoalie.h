@@ -24,8 +24,6 @@ private:
 	float XHYSTERESIS;
 	float YHYSTERESIS;
 	float CLEARYOFFSET;
-	int *pstate;
-	int which; //---- which robot we're referring to
 	floatPOINT finalPos;
 	float GOALIESTANDX;
 

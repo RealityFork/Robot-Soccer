@@ -25,9 +25,9 @@
 enum spin_dir {CLOCKWISE, ANTICLOCKWISE};
 
 void position(int which, floatPOINT finalPos, float finalAngle, float finalVel);
-void positionG(floatPOINT finalPos, float finalAngle, float finalVel);
+//void positionG(floatPOINT finalPos, float finalAngle, float finalVel);
 void angle(int which, float desiredAngle);
-void angleG(float desiredAngle);
+void angleG(int, float desiredAngle);
 void velocity(int which, int Vl, int Vr);
 
 void avoidBound(int which, floatPOINT finalPos);

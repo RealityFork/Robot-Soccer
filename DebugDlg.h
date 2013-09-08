@@ -42,7 +42,10 @@ protected:
 
 	// Generated message map functions
 	//{{AFX_MSG(DebugDlg)
-		// NOTE: the ClassWizard will add member functions here
+	afx_msg void OncheckDebug();
+	afx_msg void OncheckInfo();
+	afx_msg void OncheckWarning();
+	afx_msg void OncheckError();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

@@ -203,11 +203,11 @@ void CGrabberSettingsDlg::OnCancel()
 void CGrabberSettingsDlg::OnDefaultButton() 
 {
 	//-- load default values -------------
-	FBus.brightness = 34;
-	FBus.contrast = 35;
-	FBus.saturation = 32;
+	FBus.brightness = 50;
+	FBus.contrast = 50;
+	FBus.saturation = 50;
 	FBus.hue = 0;
-	FBus.sharpness = 7;
+	FBus.sharpness = 1;
 
 	//-- set the values in the edit box -----------
 	m_BrightnessVal = FBus.brightness;

@@ -16,18 +16,16 @@ class CDefenderAction : public RobotBehaviour //----- To defend the goal from at
 
 private:
 	float MIDDLE_X;
-	int *pstate;
-	int which; //---- which robot we're referring to
 	int innerState;
 	int clearVel;
 	int clearIncDist;
 	int hasBallDist;
-	floatPOINT loiterPos, trackingPos;
+	floatPOINT loiterPos, trackingPos, home;
 
 	BOOL hasBall(floatPOINT);
 	
 public:
-	CDefenderAction(int w, int *ps);
+	CDefenderAction(int, int*);
 	~CDefenderAction(){}
 
 //  Switching Conditions/ State Transitions
